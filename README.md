@@ -1,4 +1,4 @@
-# SBS
+# Pasja bolha
 Projekt pri predmetu OPB.
 
 Avtorice: Barbara Robba,
