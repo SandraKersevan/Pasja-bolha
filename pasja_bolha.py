@@ -3,7 +3,7 @@ import psycopg2
 import sys
 
 from bottle import *
-import auth as auth
+import auth_public as auth
 
 
 
