@@ -61,11 +61,15 @@ def registracija():
     poste = []
     regije = []
     for row in rows:
-        (postna_st, posta, regija) = row
+        (postna_st, posta, regija) = tuple(row[0].split(','))
+        postna_st = int(postna_st[1:])
+        regija = int(regija[:-1])
         postne_st.append(postna_st)
         poste.append(posta)
         regije.append(regija)
     return template('registracija1.html',
+                    postne_st=postne_st,
+                    regije=regije,
                     poste=poste)
 
 @route('/oglasi/')
