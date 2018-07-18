@@ -7,8 +7,6 @@ from bottle import *
 import auth_public as auth
 
 
-
-
 # Zakomentiraj, če ne želiš sporočil o napakah
 debug(True)
 
@@ -114,18 +112,15 @@ def prijava():
 
         if ime == username and geslo == password:
             print("Najdeno")
-            break
-
-        print("Ni v bazi")
+            return redirect("/")
         
     return template('prijava')
 
 
-@route('/registracija/')
-def registracija():
-    
+@route('/registracija/', method='GET')
+def registracija_get():
     cur.execute('''SELECT posta FROM posta ''')
-    rows = cur.fetchall() # prebere zgornji select in ga zapoše v rows v obliki (postna_st, posta, regija)
+    rows = cur.fetchall() # prebere zgornji select in ga zapiše v rows v obliki (postna_st, posta, regija)
     postne_st = []
     poste = []
     regije = []
@@ -141,15 +136,49 @@ def registracija():
         stevilka_posta.append(str(postna_st) + " " + str(posta.strip()))
     stevilka_posta.sort()
 
-    geslo1 = request.query.get('inputPassword1')
-    geslo2 = request.query.get('inputPassword2')
-    print(geslo1, geslo2)
-
     return template('registracija.tpl',
                     postne_st=postne_st,
                     regije=regije,
                     poste=poste,
                     stevilka_posta=stevilka_posta)
+
+@route('/registracija/', method='POST')
+def registracija_post():
+    """Registriraj novega uporabnika."""
+    geslo = request.forms.inputPassword1
+    geslo2 = request.forms.inputPassword2
+    uporabnik = request.forms.uporabnik
+    stevilka = int(request.forms.posta)
+
+    # Dolocimo kraj
+    kraj = ""
+    cur.execute('''SELECT posta FROM posta ''')
+    rows = cur.fetchall() # prebere zgornji select in ga zapiše v rows v obliki (postna_st, posta, regija)
+    for row in rows:
+        (postna_st, posta, regija) = tuple(row[0].split(','))
+        posta = re.sub('"', '', posta)
+        postna_st = int(postna_st[1:])
+        if stevilka == postna_st:
+            kraj = posta
+            
+    kontakt = request.forms.kontakt
+    if uporabnik != None:
+        # Ali uporabnik že obstaja?
+        cur.execute("SELECT ime FROM uporabnik WHERE ime='" + uporabnik + "'")
+        if cur.fetchone():
+            # Uporabnik že obstaja
+            print('Uporabnik že obstaja')
+        elif not geslo==geslo2:
+            # Gesli se ne ujemata
+            print('Gesli se ne ujemata.')
+        else:
+            # Vse je v redu, vstavi novega uporabnika v bazo
+            cur.execute("SELECT COUNT(*) FROM uporabnik")
+            [[stevilo_uporabnikov]] = cur.fetchall()
+            st_uporabnika = int(stevilo_uporabnikov)+1
+            nov_uporabnik = (st_uporabnika, '{0}'.format(uporabnik), '{0}'.format(kraj), '{0}'.format(kontakt), '{0}'.format(geslo))
+            cur.execute("INSERT INTO uporabnik (id_uporabnika, ime, kraj, kontakt, geslo) VALUES {0}".format(nov_uporabnik))
+            return redirect("/")
 
 @route('/oglasi/')
 def oglasi():

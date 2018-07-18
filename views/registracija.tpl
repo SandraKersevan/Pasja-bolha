@@ -3,7 +3,9 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" c
+	
+	ontent="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -13,7 +15,6 @@
   </head>
   
   <body>
-  <form role="form" method="get">
     <div id="glava">
 		<b>PASJA BOLHA</b>
     </div>
@@ -46,10 +47,10 @@
 		<div class="form-row">
 			<div class="form-group col-md-8" style="height:70px">
 				<label for="inputState" class="form-text">Pošta</label>
-				<select required id="inputState" class="form-control">
+				<select required id="inputState" class="form-control"  name="posta">
 					<option selected>Izberi..</option>
 					%for posta in stevilka_posta:
-						<option value="posta">{{posta}}</option></a></li>
+						<option value={{posta}}>{{posta}}</option>
 					%end
 				</select>
 			</div>
@@ -64,7 +65,7 @@
 		
 		<div class="form-group">
 			<label for="inputEmail" class="form-text">Email</label>
-			<input type="email" class="form-control" id="inputEmail" placeholder="janez.novak@pasjabolha.si" required>
+			<input type="email" class="form-control" id="inputEmail" placeholder="janez.novak@pasjabolha.si" name="kontakt" required>
 		</div>
 		
 		<div class="form-group">
@@ -76,7 +77,7 @@
 		
 		<div class="form-group">
 			<label for="inputUsername" class="form-text">Uporabniško ime</label>
-			<input type="text" class="form-control" id="inputUsername" placeholder="JanezN" required>
+			<input type="text" class="form-control" id="inputUsername" placeholder="JanezN" name="uporabnik" required>
 		</div>
 		
 		<div class="form-row">
