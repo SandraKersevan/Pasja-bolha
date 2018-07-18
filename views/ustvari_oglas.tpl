@@ -32,13 +32,15 @@
 		<label for="inputBreed" class="form-text">Pasma</label>
 			<select id="inputBreed" class="form-control" required>
 				<option selected>Izberi..</option>
-				<option value="mercedes">Mešanec</option>
-				<option value="audi">Čivava</option>
+					%for pasma in pasme:
+						<option value="posta">{{pasma}}</option></a></li>
+					%end
 			</select>
 
+			
 		<div class="form-group">
 			<label for="inputDescription" class="form-text">Opis</label>
-			<input type="text" class="form-control" id="inputDescription" placeholder="Opis..." required>
+			<textarea name="Text1" cols="107" rows="5" id="inputDescription" placeholder="Opis..." required></textarea>
 		</div>
 
 		<div class="form-row">
@@ -199,7 +201,7 @@
 		<br>
 
 		<div>
-			<a href="/oglasi/" class="btn btn-outline-secondary btn-lg" style="float: right;" role="button" aria-pressed="true">Oddaj oglas</a>
+			<button href="/oglasi/" class="btn btn-outline-secondary btn-lg" style="float: right;" role="button" aria-pressed="true">Oddaj oglas</button>
 		</div>
 		
 		<br>

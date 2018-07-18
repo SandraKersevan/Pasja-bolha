@@ -23,7 +23,7 @@
 		
 		
 		<div class="container">
-			<form class="form-signin" role="form" method="post" action=".">
+		<form class="form-signin" role="form" method="get">
 			<p class="form-signin-heading">Pred vstopom v pasjo bolho se prosim prijavite.</p>
 	  
 			<input type="username" class="form-control" placeholder="Uporabniško ime" name="username" required>
