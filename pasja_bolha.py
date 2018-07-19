@@ -40,7 +40,8 @@ def stevilka(besedilo):
             stevilka = int(znak)
             return stevilka
 
-            
+
+    
 ######################################################################
 # Funkcije za izgradnjo strani
 
@@ -212,13 +213,14 @@ def oglasi():
 
 @route('/ustvari_oglas/')
 def ustvari_oglas():
-
     cur.execute('''SELECT slovensko_ime FROM pasma ''')
-    rows = cur.fetchall() # prebere zgornji select in ga zapoše v rows v obliki (postna_st, posta, regija)
+    rows = cur.fetchall() # prebere zgornji select in ga zapoše v rows v obliki
     pasme = []
     for row in rows:
         row = str(row).strip('[]""''')
+        row = row.replace("'", "")
         pasme.append(row)
+    pasme.sort()
         
     return template('ustvari_oglas.tpl',
                     pasme=pasme)
