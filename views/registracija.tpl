@@ -30,24 +30,24 @@
 		<form>
 		<div class="form-row">
 			<div class="form-group col-md-6">
-				<label for="inputName" class="form-text">Ime</label>
-				<input type="name" class="form-control" id="inputName" placeholder="Janez" required>
+				<label for="ime" class="form-text">Ime</label>
+				<input type="name" class="form-control" id="ime" placeholder="Janez" name="ime" required>
 			</div>
 		<div class="form-group col-md-6">
-			<label for="inputSurname" class="form-text">Priimek</label>
-			<input type="surname" class="form-control" id="inputSurname" placeholder="Novak" required>
+			<label for="priimek" class="form-text">Priimek</label>
+			<input type="surname" class="form-control" id="priimek" placeholder="Novak" name="priimek" required>
 		</div>
 		</div>
 		  
 		<div class="form-group">
-			<label for="inputAddress" class="form-text">Naslov</label>
-			<input type="text" class="form-control" id="inputAddress" placeholder="Pasja uta 1" required>
+			<label for="naslo" class="form-text">Naslov</label>
+			<input type="text" class="form-control" id="naslov" placeholder="Pasja uta 1" name="naslov" required>
 		</div>
 
 		<div class="form-row">
 			<div class="form-group col-md-8" style="height:70px">
 				<label for="inputState" class="form-text">Pošta</label>
-				<select required id="inputState" class="form-control"  name="posta">
+				<select id="inputState" class="form-control"  name="posta" required>
 					<option selected>Izberi..</option>
 					%for posta in stevilka_posta:
 						<option value={{posta}}>{{posta}}</option>
@@ -64,36 +64,36 @@
 		<br>
 		
 		<div class="form-group">
-			<label for="inputEmail" class="form-text">Email</label>
-			<input type="email" class="form-control" id="inputEmail" placeholder="janez.novak@pasjabolha.si" name="kontakt" required>
+			<label for="email" class="form-text">Email</label>
+			<input type="email" class="form-control" id="email" placeholder="janez.novak@pasjabolha.si" name="email" required>
 		</div>
 		
 		<div class="form-group">
-			<label for="inputNumber" class="form-text">Telefonska številka</label>
-			<input type="number" class="form-control" id="inputNumber" placeholder="030123123" required>
+			<label for="stevilka" class="form-text">Telefonska številka</label>
+			<input type="number" class="form-control" id="stevilka" placeholder="030123123"  name="stevilka"required>
 		</div>
 		
 		<br>
 		
 		<div class="form-group">
-			<label for="inputUsername" class="form-text">Uporabniško ime</label>
-			<input type="text" class="form-control" id="inputUsername" placeholder="JanezN" name="uporabnik" required>
+			<label for="uporabnik" class="form-text">Uporabniško ime</label>
+			<input type="text" class="form-control" id="uporabnik" placeholder="JanezN" name="uporabnik" required>
 		</div>
 		
 		<div class="form-row">
 			<div class="form-group col-md-6">
-				<label for="inputPassword1" class="form-text">Geslo</label>
-				<input type="password" class="form-control" id="inputPassword1" name="inputPassword1" required>
+				<label for="geslo1" class="form-text">Geslo</label>
+				<input type="password" class="form-control" id="geslo1" name="geslo1" required>
 			</div>
 
 			<div class="form-group col-md-6">
-				<label for="inputPassword2" class="form-text">Ponovi geslo</label>
-				<input type="password" class="form-control" id="inputPassword2" name="inputPassword2" oninput="check(this)" required>
+				<label for="geslo2" class="form-text">Ponovi geslo</label>
+				<input type="password" class="form-control" id="geslo2" name="geslo2" oninput="check(this)" required>
 			</div>
 			
 			<script language='javascript' type='text/javascript'>
 				function check(input) {
-					if (input.value != document.getElementById('inputPassword1').value) {
+					if (input.value != document.getElementById('geslo1').value) {
 						input.setCustomValidity('Gesli se morata ujemati.');
 					} else {
 						// input is valid -- reset the error message

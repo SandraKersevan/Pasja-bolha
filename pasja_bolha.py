@@ -56,6 +56,14 @@ def static(filename):
 def zacetna_stran():
     return template('zacetna_stran')
 
+@route('/napaka_email/')
+def napaka():
+    return template('napaka_email')
+
+@route('/napaka_ime/')
+def napaka():
+    return template('napaka_uporabnisko_ime')
+
 # Stran za iskanje idealne pasme
 @route('/izbira_psa/')
 def izbira_psa():
@@ -145,12 +153,19 @@ def registracija_get():
 @route('/registracija/', method='POST')
 def registracija_post():
     """Registriraj novega uporabnika."""
-    geslo = request.forms.inputPassword1
-    geslo2 = request.forms.inputPassword2
+    ime = request.forms.ime
+    priimek = request.forms.priimek
+    naslov = request.forms.naslov
+    postna_stevilka = int(request.forms.posta)
+    email = request.forms.email
+    telefon = request.forms.stevilka
     uporabnik = request.forms.uporabnik
-    stevilka = int(request.forms.posta)
+    geslo = request.forms.geslo1
+    geslo2 = request.forms.geslo2
 
-    # Dolocimo kraj
+    # Dolocimo kraj (za postno stevilko)
+    ## OPOMBA: ali je res potrebno iskati kraj, saj je v bazi tabela povezana s tabelo poste (+ lahko jo preberemo direktno iz strani,
+    ##         saj imamo obliko postna_st+kraj v spustnem seznamu)
     kraj = ""
     cur.execute('''SELECT posta FROM posta ''')
     rows = cur.fetchall() # prebere zgornji select in ga zapiše v rows v obliki (postna_st, posta, regija)
@@ -158,27 +173,38 @@ def registracija_post():
         (postna_st, posta, regija) = tuple(row[0].split(','))
         posta = re.sub('"', '', posta)
         postna_st = int(postna_st[1:])
-        if stevilka == postna_st:
+        if postna_stevilka == postna_st:
             kraj = posta
-            
-    kontakt = request.forms.kontakt
+
     if uporabnik != None:
-        # Ali uporabnik že obstaja?
-        cur.execute("SELECT ime FROM uporabnik WHERE ime='" + uporabnik + "'")
+        # Ali je email že v bazi?
+        cur.execute("SELECT email FROM uporabniki WHERE email='" + email + "'")
         if cur.fetchone():
-            # Uporabnik že obstaja
-            print('Uporabnik že obstaja')
-        elif not geslo==geslo2:
-            # Gesli se ne ujemata
-            print('Gesli se ne ujemata.')
+            # Email že v bazi
+            print('Email že uporabljen')
+            return redirect("/napaka_email/")
+
         else:
-            # Vse je v redu, vstavi novega uporabnika v bazo
-            cur.execute("SELECT COUNT(*) FROM uporabnik")
-            [[stevilo_uporabnikov]] = cur.fetchall()
-            st_uporabnika = int(stevilo_uporabnikov)+1
-            nov_uporabnik = (st_uporabnika, '{0}'.format(uporabnik), '{0}'.format(kraj), '{0}'.format(kontakt), '{0}'.format(geslo))
-            cur.execute("INSERT INTO uporabnik (id_uporabnika, ime, kraj, kontakt, geslo) VALUES {0}".format(nov_uporabnik))
-            return redirect("/")
+            # Ali uporabnik že obstaja?
+            cur.execute("SELECT uporabnisko_ime FROM uporabniki WHERE uporabnisko_ime='" + uporabnik + "'")
+            if cur.fetchone():
+                # Uporabnik že obstaja
+                print('Uporabnik že obstaja')
+                return redirect("/napaka_ime/")
+            elif not geslo==geslo2:
+                # Gesli se ne ujemata
+                ## OPOMBA: ali je res potrebno, saj nas stran (naj) ne bi spustila cez, če se gesli ne ujemata (JavaScript koda v css)
+                print('Gesli se ne ujemata.')
+            else:
+                # Vse je v redu, vstavi novega uporabnika v bazo
+                cur.execute("SELECT COUNT(*) FROM uporabniki")
+                [[stevilo_uporabnikov]] = cur.fetchall()
+                st_uporabnika = int(stevilo_uporabnikov)+1
+                nov_uporabnik = (st_uporabnika, '{0}'.format(ime), '{0}'.format(priimek),
+                                 '{0}'.format(naslov), '{0}'.format(postna_stevilka),
+                                 '{0}'.format(email), '{0}'.format(telefon), '{0}'.format(uporabnik), '{0}'.format(geslo))
+                cur.execute("INSERT INTO uporabniki VALUES {0}".format(nov_uporabnik))
+                return redirect("/oglasi/")
 
 @route('/oglasi/')
 def oglasi():
