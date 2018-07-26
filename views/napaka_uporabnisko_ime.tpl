@@ -31,7 +31,7 @@
 
 			<div id="wrap">
 				<div id="left_col">
-					<img <img src="https://familiechat.dk/wp-content/uploads/2018/07/WTF.gif">
+					<img src="https://familiechat.dk/wp-content/uploads/2018/07/WTF.gif">
 				</div>
 				
 				<div id="right_col">

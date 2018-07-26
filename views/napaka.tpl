@@ -37,7 +37,7 @@
 				<div id="right_col">
 					<br>
 					<h2>Napaka!</h2>
-					<p>Uporabnik s tem emailom je že registriran.</p>
+					<p>Napačno uporabniško ime ali geslo.</p>
 					<br>
 					<button class="btn btn-outline-dark btn-lg" onclick="goBack()">Nazaj</button>
 

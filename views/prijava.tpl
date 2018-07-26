@@ -23,10 +23,14 @@
 		
 		
 		<div class="container">
-		<form class="form-signin" role="form" method="get">
+		<form class="form-signin" role="form" method="post" action=".">
 			<p class="form-signin-heading">Pred vstopom v pasjo bolho se prosim prijavite.</p>
 	  
-			<input type="username" class="form-control" placeholder="Uporabniško ime" name="username" required>
+			<input type="username" class="form-control" placeholder="Uporabniško ime" 
+                %if username: 
+                value="{{username}}" 
+                %end 
+                name="username" required>
 			<input type="password" class="form-control" placeholder="Geslo" name="password" required>
 			
 			<button class="btn btn-outline-secondary" type="submit" style="height:40px;width:300px">Prijava</button>

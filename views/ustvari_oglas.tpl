@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
@@ -30,17 +30,16 @@
 		<h3>Informacije o psu/psih</h3>
 		
 		<label for="inputBreed" class="form-text">Pasma</label>
-			<select id="inputBreed" class="form-control" required>
+			<select id="inputBreed" class="form-control" name="" required>
 				<option selected>Izberi..</option>
 					%for pasma in pasme:
-						<option value="posta">{{pasma}}</option></a></li>
+						<option value={{pasma}}>{{pasma}}</option>
 					%end
 			</select>
-
 			
 		<div class="form-group">
 			<label for="inputDescription" class="form-text">Opis</label>
-			<textarea name="Text1" cols="107" rows="5" id="inputDescription" placeholder="Opis..." required></textarea>
+			<textarea cols="107" rows="5" id="inputDescription" placeholder="Opis..." name="opis" required></textarea>
 		</div>
 
 		<div class="form-row">
@@ -49,7 +48,7 @@
 			</div>
 
 			<div class="form-group col-md-11">
-				<input type="date" id="inputDate" min='2000-01-01' required>
+				<input type="date" id="inputDate" min='2000-01-01' name="skotitev" required>
 			</div>
 		</div>
 		
@@ -59,7 +58,7 @@
 			</div>
 
 			<div class="form-group col-md-11">
-				<input type="number" class="form-control" id="inputPassword2" required>
+				<input type="number" value="0" class="form-control" id="cena" name="cena" required>
 			</div>
 		</div>
 
@@ -69,7 +68,7 @@
 			</div>
 
 			<div class="form-group col-md-5">
-				<input type="number" value="0" class="form-control" id="inputFemale" required>
+				<input type="number" value="0" class="form-control" id="inputFemale" name="samicke" required>
 			</div>
 			
 			<div class="form-group col-md-1">
@@ -77,9 +76,21 @@
 			</div>
 
 			<div class="form-group col-md-5">
-				<input type="number" value="0" class="form-control" id="inputMale" required>
+				<input type="number" value="0" class="form-control" id="inputMale" name="samcki" required>
 			</div>
 		</div>
+		
+			<script language='javascript' type='text/javascript'>
+				function check(input) {
+					if (document.getElementById('inputFemale').value == 0 && document.getElementById('inputMale').value == 0) {
+						input.setCustomValidity('Oglas mora vsebovati vsaj eno žival.');
+					} else {
+						// input is valid -- reset the error message
+						input.setCustomValidity('');
+							}
+					}
+			</script>
+		
 		
 		<div class="form-row">
 			<div class="form-group col-md-4">
@@ -89,10 +100,10 @@
 			<div class="form-group col-md-8">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary active">
-					<input type="radio" name="options" id="option1" autocomplete="off"> Da
+					<input type="radio" name="rodovnik" id="da" value="da" autocomplete="off" checked="checked" > Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="options" id="option2" autocomplete="off"> Ne
+					<input type="radio" name="rodovnik" id="ne" value="ne" autocomplete="off"> Ne
 				</label>
 			</div>
 			</div>
@@ -106,10 +117,10 @@
 			<div class="form-group col-md-8">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary active">
-					<input type="radio" name="options" id="option1" autocomplete="off"> Da
+					<input type="radio" name="veterinar" id="da" value="da" autocomplete="off" checked="checked"> Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="options" id="option2" autocomplete="off"> Ne
+					<input type="radio" name="veterinar" id="ne" value="ne" autocomplete="off"> Ne
 				</label>
 			</div>
 			</div>
@@ -123,10 +134,10 @@
 			<div class="form-group col-md-8">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary active">
-					<input type="radio" name="options" id="option1" autocomplete="off"> Da
+					<input type="radio" name="cepljenje" id="da" value="da" autocomplete="off" checked="checked" > Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="options" id="option2" autocomplete="off"> Ne
+					<input type="radio" name="cepljenje" id="ne" value="ne" autocomplete="off"> Ne
 				</label>
 			</div>
 			</div>
@@ -140,10 +151,10 @@
 			<div class="form-group col-md-8">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary active">
-					<input type="radio" name="options" id="option1" autocomplete="off"> Da
+					<input type="radio" name="kastracija" id="da" value="da" autocomplete="off" checked="checked"> Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="options" id="option2" autocomplete="off"> Ne
+					<input type="radio" name="kastracija" id="ne" value="ne" autocomplete="off"> Ne
 				</label>
 			</div>
 			</div>
@@ -156,10 +167,20 @@
 			</div>
 
 			<div class="form-group col-md-10">
-				<input type="file" id="my_file">
+				<input type="file" id="inputPicture" name="slike" multiple>
 			</div>
 		</div>
 		
+		<script language='javascript' type='text/javascript'> <!-- Ne dela - naj bi omejil število dodanih slik -->
+			$(function(){
+				$("input[type='submit']").click(function(){
+					var $fileUpload = $("input[type='file']");
+					if (parseInt($fileUpload.get(0).files.length)>4){
+						alert("Naložite lahko le 4 fotografije.");
+					}
+				});    
+			});​
+		</script>
 		<br>
 		
 		<h3>Informacije o lastniku</h3>
@@ -173,10 +194,10 @@
 			<div class="form-group col-md-8">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary active">
-					<input type="radio" name="options" id="option1" autocomplete="off"> Da
+					<input type="radio" name="email" id="da" name="da" autocomplete="off" checked="checked"> Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="options" id="option2" autocomplete="off"> Ne
+					<input type="radio" name="email" id="ne" name="ne" autocomplete="off"> Ne
 				</label>
 			</div>
 			</div>
@@ -190,10 +211,10 @@
 			<div class="form-group col-md-8">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary active">
-					<input type="radio" name="options" id="option1" autocomplete="off"> Da
+					<input type="radio" name="telefon" id="da" value="da" autocomplete="off" checked="checked"> Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="options" id="option2" autocomplete="off"> Ne
+					<input type="radio" name="telefon" id="ne" value="ne" autocomplete="off"> Ne
 				</label>
 			</div>
 			</div>

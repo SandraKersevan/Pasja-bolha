@@ -10,6 +10,8 @@ import auth_public as auth
 # Zakomentiraj, če ne želiš sporočil o napakah
 debug(True)
 
+prijavljen = "Sandra"
+
 #################################################################
 # Prikljapljamo bazo:
 # !/usr/bin/python
@@ -46,7 +48,7 @@ def stevilka(besedilo):
 # Funkcije za izgradnjo strani
 
 # Statične datoteke damo v mapo 'static' in do njih pridemo na naslovu '/static/...'
-# Uporabno za slike in CSS, poskusi http://localhost:8080/static/slika.jpg
+# Uporabno za slike in CSS
 @route('/static/<filename:path>')
 def static(filename):
     return static_file(filename, root='static')
@@ -57,13 +59,18 @@ def static(filename):
 def zacetna_stran():
     return template('zacetna_stran')
 
+# Strani za napake
 @route('/napaka_email/')
-def napaka():
+def napaka_email():
     return template('napaka_email')
 
 @route('/napaka_ime/')
-def napaka():
+def napaka_uprabnisko_ime():
     return template('napaka_uporabnisko_ime')
+
+@route('/napaka/')
+def napaka():
+    return template('napaka')
 
 # Stran za iskanje idealne pasme
 @route('/izbira_psa/')
@@ -108,22 +115,30 @@ def izbira_psa():
 
 # Stran za prijavo in registracijo
 @route('/prijava/', method='GET')
-def prijava():
-    username = request.query.get('username')
-    password = request.query.get('password')
+def prijava_get():     
+    return template('prijava.tpl',
+                    username=None)
+
+@route('/prijava/', method='POST')
+def prijava_post():
+    username = request.forms.username
+    password = request.forms.password
 
     print(username, password)
-
-    cur.execute('''SELECT ime, geslo FROM uporabnik''')
+    
+    cur.execute('''SELECT uporabnisko_ime, geslo FROM uporabniki''')
     rows = cur.fetchall()
     for row in rows:
         ime, geslo = row
 
         if ime == username and geslo == password:
             print("Najdeno")
-            return redirect("/")
-        
-    return template('prijava')
+            response.set_cookie('username', username, path='/')
+            return redirect("/oglasi/")
+
+        else:
+            print("Ni v bazi")
+            return redirect("/napaka/")
 
 
 @route('/registracija/', method='GET')
@@ -209,7 +224,10 @@ def registracija_post():
 
 @route('/oglasi/')
 def oglasi():
-    return template('oglasi')
+    username = request.get_cookie('username')
+    print(username)
+    return template('oglasi',
+                    username=username)
 
 @route('/ustvari_oglas/')
 def ustvari_oglas():
