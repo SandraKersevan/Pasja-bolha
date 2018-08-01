@@ -29,14 +29,16 @@
 		
 		<h3>Informacije o psu/psih</h3>
 		
-		<label for="inputBreed" class="form-text">Pasma</label>
-			<select id="inputBreed" class="form-control" name="" required>
+		<div class="form-row">
+			<label for="inputBreed" class="form-text">Pasma</label>
+			<select id="inputBreed" class="form-control" name="pasma" required>
 				<option selected>Izberi..</option>
-					%for pasma in pasme:
-						<option value={{pasma}}>{{pasma}}</option>
+					%for (pasma, id_pasme) in pasme:
+						<option value={{id_pasme}}>{{pasma}}</option>
 					%end
 			</select>
-			
+		</div>
+		
 		<div class="form-group">
 			<label for="inputDescription" class="form-text">Opis</label>
 			<textarea cols="107" rows="5" id="inputDescription" placeholder="Opis..." name="opis" required></textarea>
@@ -94,7 +96,7 @@
 		
 		<div class="form-row">
 			<div class="form-group col-md-4">
-				<label for="inputPassword1" class="form-text">Pes ima rodovnik.</label>
+				<label for="rodovnik" class="form-text">Pes ima rodovnik.</label>
 			</div>
 
 			<div class="form-group col-md-8">
@@ -194,16 +196,16 @@
 			<div class="form-group col-md-8">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary active">
-					<input type="radio" name="email" id="da" name="da" autocomplete="off" checked="checked"> Da
+					<input type="radio" name="email" id="da" value="da" autocomplete="off" checked="checked"> Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="email" id="ne" name="ne" autocomplete="off"> Ne
+					<input type="radio" name="email" id="ne" value="ne" autocomplete="off"> Ne
 				</label>
 			</div>
 			</div>
 		</div>
 		
-				<div class="form-row">
+		<div class="form-row">
 			<div class="form-group col-md-4">
 				<label for="inputPassword1" class="form-text">Pokaži mojo tel. številko.</label>
 			</div>
@@ -225,6 +227,8 @@
 			<button href="/oglasi/" class="btn btn-outline-secondary btn-lg" style="float: right;" role="button" aria-pressed="true">Oddaj oglas</button>
 		</div>
 		
+		<br>
+		<br>
 		<br>
 	</form>
 

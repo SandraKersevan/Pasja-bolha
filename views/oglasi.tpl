@@ -24,7 +24,10 @@
 		
 		
 		<p style="text-align:left;">
-			Prijavljeni ste kot <u>UPORABNIŠKO_IME</u>
+			Prijavljeni ste kot  <b><u>{{username}}</u> </b>
+			<br> 
+			<a href="/" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Začetna stran</a>
+			
 			<span style="float:right;">
 				<a href="/ustvari_oglas/" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Ustvari oglas</a>
 			</span>

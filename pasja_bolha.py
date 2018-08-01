@@ -2,6 +2,7 @@
 import psycopg2
 import sys
 import re
+import datetime
 
 from bottle import *
 import auth_public as auth
@@ -9,8 +10,6 @@ import auth_public as auth
 
 # Zakomentiraj, če ne želiš sporočil o napakah
 debug(True)
-
-prijavljen = "Sandra"
 
 #################################################################
 # Prikljapljamo bazo:
@@ -23,7 +22,6 @@ conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT) # onemo
 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 print ("Connected!\n")
-
 
 ######################################################################
 # Pomozne funkcije:
@@ -42,7 +40,14 @@ def stevilka(besedilo):
             stevilka = int(znak)
             return stevilka
 
+def boolean(besedilo):
+    '''Spremeni besedilo 'da' v True in 'ne' v False.'''
 
+    if besedilo == 'da':
+        return True
+    
+    elif besedilo == 'ne':
+        return False
     
 ######################################################################
 # Funkcije za izgradnjo strani
@@ -134,7 +139,9 @@ def prijava_post():
         if ime == username and geslo == password:
             print("Najdeno")
             response.set_cookie('username', username, path='/')
-            return redirect("/oglasi/")
+            response.status = 303
+            response.set_header('Location', '/oglasi/')
+            break
 
         else:
             print("Ni v bazi")
@@ -229,21 +236,70 @@ def oglasi():
     return template('oglasi',
                     username=username)
 
-@route('/ustvari_oglas/')
-def ustvari_oglas():
-    cur.execute('''SELECT slovensko_ime FROM pasma ''')
+@route('/ustvari_oglas/', method='GET')
+def ustvari_oglas_get():
+    cur.execute('''SELECT slovensko_ime, id_pasme FROM pasma ''')
     rows = cur.fetchall() # prebere zgornji select in ga zapoše v rows v obliki
     pasme = []
     for row in rows:
-        row = str(row).strip('[]""''')
-        row = row.replace("'", "")
-        pasme.append(row)
+        pasma, id_pasme = row
+        pasma = str(pasma).strip('[]""''')
+        pasma = pasma.replace("'", "")
+        pasme.append((pasma, id_pasme))
     pasme.sort()
+    
+    username = request.get_cookie('username')
         
     return template('ustvari_oglas.tpl',
-                    pasme=pasme)
+                    pasme=pasme,
+                    username=username)
+
+@route('/ustvari_oglas/', method='POST')
+def ustvari_oglas_post():
+    id_pasme = int(request.forms.pasma)
+    opis = request.forms.opis
+    skotitev = request.forms.skotitev
+    cena = int(request.forms.cena)
+    samicke = int(request.forms.samicke)
+    samcki = int(request.forms.samcki)
+    rodovnik = request.forms.rodovnik
+    veterinar = request.forms.veterinar
+    cepljenje = request.forms.cepljenje
+    kastracija = request.forms.kastracija
+    email = request.forms.email
+    telefon = request.forms.telefon
+    uporabnik = request.get_cookie('username')
+
+    rodovnik = boolean(rodovnik)
+    veterinar = boolean(veterinar)
+    cepljenje = boolean(cepljenje)
+    kastracija = boolean(kastracija)
+    email = boolean(email)
+    telefon = boolean(telefon)
+    
+    # Iz baze preberemo id_uporabnika
+    cur.execute("SELECT id_uporabnika FROM uporabniki WHERE uporabnisko_ime='" + uporabnik + "'")
+    [[id_uporabnika]] = cur.fetchall()
+    id_uporabnika = int(id_uporabnika)
+
+    # Pogledamo za id_oglasa
+    # OPOMBA:  Vedno gledamo število oglasov, kaj če kakšnega vmes izbrišemo iz baze? (potem imata dva isti id)
+    cur.execute("SELECT COUNT(*) FROM oglas")
+    [[stevilo_oglasov]] = cur.fetchall()
+    id_oglasa = int(stevilo_oglasov)+1
+
+    cas_oddaje = datetime.now()
+
+    nov_oglas = (id_oglasa, id_uporabnika, '{0}'.format(cas_oddaje), id_pasme, 
+                 '{0}'.format(opis), '{0}'.format(skotitev), '{0}'.format(cena),
+                 '{0}'.format(samicke), '{0}'.format(samcki), '{0}'.format(rodovnik),
+                 '{0}'.format(veterinar), '{0}'.format(cepljenje), '{0}'.format(kastracija),
+                 '{0}'.format(telefon), '{0}'.format(email))
+    cur.execute("INSERT INTO oglas VALUES {0}".format(nov_oglas))
+    return redirect("/oglasi/")
 
 
+################################################################################################
 # Glavni program
 # poženemo strežnik na portu 8080, glej http://localhost:8080/
 run(host='localhost', port=8080)

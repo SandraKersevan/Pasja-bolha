@@ -38,7 +38,7 @@
 		</div>
 		  
 		<div class="form-group">
-			<label for="naslo" class="form-text">Naslov</label>
+			<label for="naslov" class="form-text">Naslov</label>
 			<input type="text" class="form-control" id="naslov" placeholder="Pasja uta 1" name="naslov" required>
 		</div>
 
