@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
@@ -50,9 +50,25 @@
 			</div>
 
 			<div class="form-group col-md-11">
-				<input type="date" id="inputDate" min='2000-01-01' name="skotitev" required>
+				<input type="date" id="inputDate" min='2000-01-01' max='2018-08-01' name="skotitev" required>
 			</div>
 		</div>
+		
+		<script language='javascript' type='text/javascript'>
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+			if(dd<10){
+				dd='0'+dd
+			} 
+			if(mm<10){
+				mm='0'+mm
+			} 
+
+			today = yyyy+'-'+mm+'-'+dd;
+			document.getElementById("inputDate").setAttribute("max", today);
+		</script>
 		
 		<div class="form-row">
 			<div class="form-group col-md-1">
@@ -60,7 +76,7 @@
 			</div>
 
 			<div class="form-group col-md-11">
-				<input type="number" value="0" class="form-control" id="cena" name="cena" required>
+				<input type="number" value="0" min='0' class="form-control" id="cena" name="cena" required>
 			</div>
 		</div>
 
@@ -70,7 +86,7 @@
 			</div>
 
 			<div class="form-group col-md-5">
-				<input type="number" value="0" class="form-control" id="inputFemale" name="samicke" required>
+				<input type="number" value="0" min='0' class="form-control" id="inputFemale" name="samicke" required>
 			</div>
 			
 			<div class="form-group col-md-1">
@@ -78,7 +94,7 @@
 			</div>
 
 			<div class="form-group col-md-5">
-				<input type="number" value="0" class="form-control" id="inputMale" name="samcki" required>
+				<input type="number" value="0" min='0' class="form-control" id="inputMale" name="samcki" oninput="check(this)" required>
 			</div>
 		</div>
 		
@@ -196,10 +212,10 @@
 			<div class="form-group col-md-8">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary active">
-					<input type="radio" name="email" id="da" value="da" autocomplete="off" checked="checked"> Da
+					<input type="radio" name="email" id="emailda" value="da" autocomplete="off" checked="checked"> Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="email" id="ne" value="ne" autocomplete="off"> Ne
+					<input type="radio" name="email" id="emailne" value="ne" autocomplete="off" onclick="checki(this)"> Ne
 				</label>
 			</div>
 			</div>
@@ -213,18 +229,31 @@
 			<div class="form-group col-md-8">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary active">
-					<input type="radio" name="telefon" id="da" value="da" autocomplete="off" checked="checked"> Da
+					<input type="radio" name="telefon" id="telefonda" value="da" autocomplete="off" checked="checked"> Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="telefon" id="ne" value="ne" autocomplete="off"> Ne
+					<input type="radio" name="telefon" id="telefonne" value="ne" autocomplete="off" onclick="checki(this)"> Ne
 				</label>
 			</div>
 			</div>
 		</div>
+		
+			<script language='javascript' type='text/javascript'>
+				function checki(input) {
+					if (document.getElementById('emailne').checked && document.getElementById('telefonne').checked) {
+						alert("One must be yes.");
+						input.setCustomValidity('One must be yes.');
+					} else {
+						// input is valid -- reset the error message
+						input.setCustomValidity('');
+							}
+					}
+			</script>
+		
 		<br>
 
 		<div>
-			<button href="/oglasi/" class="btn btn-outline-secondary btn-lg" style="float: right;" role="button" aria-pressed="true">Oddaj oglas</button>
+			<button href="/oglasi/" class="btn btn-outline-secondary btn-lg" style="float: right;" onclick="check(this)" role="button" aria-pressed="true">Oddaj oglas</button>
 		</div>
 		
 		<br>

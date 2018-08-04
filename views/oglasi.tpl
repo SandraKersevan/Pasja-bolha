@@ -1,5 +1,24 @@
 <!doctype html>
 <html lang="en">
+
+	<style>
+	a:link, a:visited {
+		background-color: White;
+		color: Black;
+		padding: 14px 25px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		border-style: solid;
+		border-width: 0.2px;
+		border-color: Grey;
+	}
+
+	a:hover, a:active {
+		background-color: White;
+	}
+	</style>
+	
 	<head>
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
@@ -22,20 +41,98 @@
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 		
+		<style type="text/css">
+			#wrap {
+			   width:800px;
+			   margin:0 auto;
+			}
+			#left_col {
+			   float:left;
+			   width:400px;
+			}
+			#right_col {
+			   float:right;
+			   width:400px;
+			   align: left;
+			}
+		</style>
 		
 		<p style="text-align:left;">
+			<br>
 			Prijavljeni ste kot  <b><u>{{username}}</u> </b>
 			<br> 
-			<a href="/" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Začetna stran</a>
+			<button href="" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Začetna stran</button>
 			
 			<span style="float:right;">
-				<a href="/ustvari_oglas/" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Ustvari oglas</a>
+				<button href="/ustvari_oglas/" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Ustvari oglas</button>
 			</span>
 		</p>
 		
-		
-		<div class="box">Oglas1</div>
-		<div class="box">Oglas2</div>
+		<center>
+		<a href="/oglas/" style="display:block;width:800px; height:300px" target="_blank" align="center">
+			<div id="wrap">
+				<div id="left_col">
+					<img style="height:280px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0">
+				</div>
+				
+				<div id="right_col">
+					<br>
+					<h3>Aljaški malamut</h3>
+					<br>
+					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png"> &nbsp;&nbsp; 
+					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
+					<br>
+					<br>
+					<p>200 ‎€</p>
+					<p>Ljubljana z okolico</p>
+					<br>
+				</div>
+			</div>
+		</a>
+		<br>
+		<a href="/izbira_psa/" style="display:block;width:800px; height:300px" target="_blank" align="center">
+			<div id="wrap">
+				<div id="left_col">
+					<img style="height:280px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0">
+				</div>
+				
+				<div id="right_col">
+					<br>
+					<h3>Aljaški malamut</h3>
+					<br>
+					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png"> &nbsp;&nbsp; 
+					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
+					<br>
+					<br>
+					<p>200 ‎€</p>
+					<p>Ljubljana z okolico</p>
+					<br>
+				</div>
+			</div>
+		</a>
+		<br>
+		<a href="/izbira_psa/" style="display:block;width:800px; height:300px" target="_blank" align="center">
+			<div id="wrap">
+				<div id="left_col">
+					<img style="height:280px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0">
+				</div>
+				
+				<div id="right_col">
+					<br>
+					<h3>Aljaški malamut</h3>
+					<br>
+					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png"> &nbsp;&nbsp; 
+					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
+					<br>
+					<br>
+					<p>200 ‎€</p>
+					<p>Ljubljana z okolico</p>
+					<br>
+				</div>
+			</div>
+		</a>
+		<br>
+		</center>
 
 			
 	</tbody>

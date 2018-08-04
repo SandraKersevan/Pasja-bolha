@@ -8,58 +8,99 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-		<title>Aktualni oglasi</title>
-		<link rel="stylesheet" href="/static/pes.css" type="text/css"/> 
+		<!-- PASMA IZ OGLASA TODO -->
+		<title>Aljaški malamut</title>
+		<link rel="stylesheet" href="/static/idealni_psi.css" type="text/css"/> 
 	</head>
   
 	<body>
 		<div id="glava">
 			<b>PASJA BOLHA</b>
 		</div>
-		<h1>Aktualni oglasi</h1>
+		<!-- PASMA IZ OGLASA TODO -->
+		<h1>Aljaški malamut</h1>
 		<div id="vsebina">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 		
-		<style type="text/css">
-			#wrap {
-			   width:800px;
-			   margin:0 auto;
-			}
-			#left_col {
-			   float:left;
-			   width:400px;
-			}
-			#right_col {
-			   float:right;
-			   width:400px;
-			}
-		</style>
-
-			<div id="wrap">
-				<div id="left_col">
-					<br>
-					<h3>Pozdravljen pasjeljubec!</h3>
-					<br>
-					<p>Na tej strani najdeš vse o psih.</p>
+		
+			
+		<div id="wrap">
+		<table id="tabela">
+   	          		<colgroup>
+						<col style="width:50%">
+						<col style="width:50%">
+					</colgroup>
 					
-					<p>Če želite poiskati svojo idealno pasmo:</p>
-					<div>
-						<a href="/izbira_psa/" class="btn btn-outline-secondary btn-lg" role="button" aria-pressed="true">Izberi idealno pasmo</a>
-					</div>
-					<br>
-					
-					<p>Če želite poiskati svojega novega psa:</p>
-					<div>
-						<a href="/prijava/" class="btn btn-outline-secondary btn-lg" role="button" aria-pressed="true">Pasja bolha</a>
-					</div>
-
-					</div>
-				
-				<div id="right_col">
-					<img <img src="https://static1.squarespace.com/static/55581741e4b0607a0bad8839/583fbb82f7e0ab824c10fd06/583fbba72994cae6abcb4884/1480571816670/tumblr_ocjmrla7p61u8yw5ao1_540.gif?format=500w">
-				</div>
-			</div>
+					<tbody>
+						<tr>
+							<td>
+							<center>
+							<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+							  <div class="carousel-inner">
+								<div class="carousel-item active">
+								  <img class="d-block w-100" style="height:300px;max-width:600px;width: expression(this.width > 600 ? 600: true);" src="https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg" alt="First slide">
+								</div>
+								<div class="carousel-item">
+								  <img class="d-block w-100" style="height:300px;max-width:600px;width: expression(this.width > 600 ? 600: true);" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPpAd3yRIIxi5z8WDn-vileb-mPEcjWNKTdZZzJ8tzc5GvLhIz" alt="Second slide">
+								</div>
+								<div class="carousel-item">
+								  <img class="d-block w-100" style="height:300px;max-width:600px;width: expression(this.width > 600 ? 600: true);" src="http://suggestnepal.com/wp-content/uploads/2014/08/kabini-image3.jpg" alt="Third slide">
+								</div>
+							  </div>
+							  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							  </a>
+							  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							  </a>
+							</div>
+							</center>
+							</td>
+							
+							<td>
+							<h4>Splošne informacije</h4>
+							<br>
+							<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png">
+							3  &nbsp;&nbsp; 
+							<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
+							2
+							<br>
+							<br>
+							<p>Skotitev: 11.3.2004</p>
+							<p>Cena: 200 ‎€</p>
+							<p>Pes ima rodovnik, je veterinarsko oskrbljen, ni cepljen in ni kastriran.</p>
+							</td>
+					    </tr>
+					</tbody>
+				</table>
+	
+		</div>
+		
+		<div>
+		<br>
+		<h4>Prodajalec o psu</h4>
+		<p>Pes je lep, mlad, nagajiv. Ima 4 šape in smrček.</p>
+		<br>
+		<h4>Kontakni podatki</h4>
+		<p>Prodajalec prihaja iz Ljubljane ali okolice.</p>
+		<p>Telefonska številka:</p>
+		<p>Email:</p>
+		</div>
+			
+		<div>
+		<br>
+		<h3>Komentarji</h3>
+		<p>Še ni oddanih komentarjev.</p>
+		<input type="comment" class="form-control" id="comment" placeholder="Napiši komantar..." name="comment">
+		<span style="float:right;">
+				<button class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Oddaj komentar</button>
+		</span>
+		<br>
+		<br>
+		</div>
 	</tbody>
 	
 

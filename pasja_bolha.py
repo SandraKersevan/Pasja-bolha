@@ -23,6 +23,7 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 print ("Connected!\n")
 
+secret = "to skrivnost je zelo tezko uganiti 1094107c907cw982982c42"
 ######################################################################
 # Pomozne funkcije:
 
@@ -30,7 +31,7 @@ def stevilka(besedilo):
     '''Spremeni besedilo s številko v številko.
     Uporabimo, da izbran radio button spremenimo v njegovo vrednost.
     Če ni bil izbran noben, izpiše 0.'''
-    stevilka = 0
+    stevilka = 3
 
     if besedilo == None:
         return stevilka
@@ -78,8 +79,12 @@ def napaka():
     return template('napaka')
 
 # Stran za iskanje idealne pasme
-@route('/izbira_psa/')
-def izbira_psa():
+@route('/izbira_psa/', method='GET')
+def izbira_psa_get():
+    return template('izbira_psa')
+
+@route('/izbira_psa/', method='POST')
+def izbira_psa_post():
     notranjost = request.query.get('notranjost')
     izkusnje = request.query.get('izkusnje')
     obcutljivost = request.query.get('obcutljivost')
@@ -116,7 +121,26 @@ def izbira_psa():
                stevilka(utrujenost), stevilka(gibanje), stevilka(igrivost)]
     print(izbrano)
 
-    return template('izbira_psa')
+    while True:
+        response.set_cookie('izbrano', izbrano, path='/', secret=secret)
+        response.status = 303
+        response.set_header('Location', '/idealni_psi/')
+        break
+
+# Stran z rezultati
+@route('/idealni_psi/', method='GET')
+def idealni_psi_get():
+    izbrano = request.get_cookie('izbrano', secret=secret)
+    return template('idealni_psi',
+                    izbrano=izbrano)
+
+@route('/idealni_psi/', method='POST')
+def idealni_psi_post():
+    response.delete_cookie('izbrano')
+    print("Cookie izbrano pobrisan, samo ni zares")
+    # OPOMBA: Tu je nek bug, ker ne pobriše cookija, ko gre nazaj
+    return redirect("/izbira_psa/")
+
 
 # Stran za prijavo in registracijo
 @route('/prijava/', method='GET')
@@ -229,12 +253,28 @@ def registracija_post():
                 cur.execute("INSERT INTO uporabniki VALUES {0}".format(nov_uporabnik))
                 return redirect("/oglasi/")
 
-@route('/oglasi/')
-def oglasi():
+# Stran z oglasi
+@route('/oglasi/', method='GET')
+def oglasi_get():
+    username = request.get_cookie('username')
+    return template('oglasi',
+                    username=username)
+
+@route('/oglasi/', method='POST')
+def oglasi_post():
     username = request.get_cookie('username')
     print(username)
     return template('oglasi',
                     username=username)
+
+# Stran z oglasom, njegovimi podrobnostmi in komentarji
+@route('/oglas/', method='GET')
+def oglas_get():
+    return template('oglas')
+ 
+@route('/oglas/', method='POST')
+def oglas_post():
+    return template('oglas')
 
 @route('/ustvari_oglas/', method='GET')
 def ustvari_oglas_get():

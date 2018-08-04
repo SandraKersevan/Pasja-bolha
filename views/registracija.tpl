@@ -46,7 +46,7 @@
 			<div class="form-group col-md-8" style="height:70px">
 				<label for="inputState" class="form-text">Pošta</label>
 				<select id="inputState" class="form-control"  name="posta" required>
-					<option selected>Izberi..</option>
+					<option selected disabled value="0"></option>
 					%for posta in stevilka_posta:
 						<option value={{posta}}>{{posta}}</option>
 					%end
@@ -104,9 +104,19 @@
 		<br>
 		
 		<div>
-			<button href="/oglasi/" type="submit" class="btn btn-outline-secondary" role="button" aria-pressed="true">Registriraj se</button>
+			<button href="/oglasi/" type="submit" class="btn btn-outline-secondary" role="button" aria-pressed="true" onclick="check(this)">Registriraj se</button>
 		</div>
 		
+		<script language='javascript' type='text/javascript'>
+				function check(input) {
+					if (document.getElementById('inputState').value == "0") {
+						input.setCustomValidity('Izberi pošto.');
+					} else {
+						// input is valid -- reset the error message
+						input.setCustomValidity('');
+							}
+					}
+		</script>
 		<br>
 	</form>
 
