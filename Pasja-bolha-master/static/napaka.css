@@ -1,0 +1,25 @@
+body {
+    margin: 0px;
+    font-family: arial;
+}
+
+h1 {
+    margin: 2px 0px 1em 0px;
+    background-color: rgb(250, 225, 209);
+    color: Black;
+    padding-left: 20px;
+	font-size: 50%;
+    text-align: center;
+}
+
+div#vsebina {
+    height: 400px;
+    width: 600px;
+    background: white;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -160px;
+    margin-left: -350px;
+}
