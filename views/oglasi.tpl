@@ -57,6 +57,8 @@
 			}
 		</style>
 		
+		<form class="form-signin" role="form" method="post" action=".">
+		
 		<p style="text-align:left;">
 			<br>
 			Prijavljeni ste kot  <b><u>{{username}}</u> </b>
@@ -69,69 +71,33 @@
 		</p>
 		
 		<center>
-		<a href="/oglas/" style="display:block;width:800px; height:300px" target="_blank" align="center">
-			<div id="wrap">
-				<div id="left_col">
-					<img style="height:280px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0">
-				</div>
+		%for (id_oglasa,slika,pasma,cena,regija,st_samick,st_samckov) in oglasi:
+			<a href="/oglas/{{id_oglasa}}" style="display:block;width:800px; height:300px" target="_blank" align="center">
+				<div id="wrap">
+					<div id="left_col">
+						<img style="height:280px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="{{slika}}"">
+					</div>
 				
-				<div id="right_col">
-					<br>
-					<h3>Aljaški malamut</h3>
-					<br>
-					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png"> &nbsp;&nbsp; 
-					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
-					<br>
-					<br>
-					<p>200 ‎€</p>
-					<p>Ljubljana z okolico</p>
-					<br>
+					<div id="right_col">
+						<br>
+						<h3>{{pasma}}</h3>
+						<br>
+						%if st_samick != 0:
+							<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png"> &nbsp;&nbsp; 
+						%end
+						%if st_samckov != 0:
+							<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
+						%end
+						<br>
+						<br>
+						<p>{{cena}}</p>
+						<p>{{regija}}</p>
+						<br>
+					</div>
 				</div>
-			</div>
-		</a>
+			</a>
 		<br>
-		<a href="/izbira_psa/" style="display:block;width:800px; height:300px" target="_blank" align="center">
-			<div id="wrap">
-				<div id="left_col">
-					<img style="height:280px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0">
-				</div>
-				
-				<div id="right_col">
-					<br>
-					<h3>Aljaški malamut</h3>
-					<br>
-					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png"> &nbsp;&nbsp; 
-					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
-					<br>
-					<br>
-					<p>200 ‎€</p>
-					<p>Ljubljana z okolico</p>
-					<br>
-				</div>
-			</div>
-		</a>
-		<br>
-		<a href="/izbira_psa/" style="display:block;width:800px; height:300px" target="_blank" align="center">
-			<div id="wrap">
-				<div id="left_col">
-					<img style="height:280px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0">
-				</div>
-				
-				<div id="right_col">
-					<br>
-					<h3>Aljaški malamut</h3>
-					<br>
-					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png"> &nbsp;&nbsp; 
-					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
-					<br>
-					<br>
-					<p>200 ‎€</p>
-					<p>Ljubljana z okolico</p>
-					<br>
-				</div>
-			</div>
-		</a>
-		<br>
+		%end
 		</center>
 
 			

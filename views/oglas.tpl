@@ -18,7 +18,7 @@
 			<b>PASJA BOLHA</b>
 		</div>
 		<!-- PASMA IZ OGLASA TODO -->
-		<h1>Aljaški malamut</h1>
+		<h1>{{pasma}}</h1>
 		<div id="vsebina">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -39,7 +39,7 @@
 							<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 							  <div class="carousel-inner">
 								<div class="carousel-item active">
-								  <img class="d-block w-100" style="height:300px;max-width:600px;width: expression(this.width > 600 ? 600: true);" src="https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg" alt="First slide">
+								  <img class="d-block w-100" style="height:300px;max-width:600px;width: expression(this.width > 600 ? 600: true);" src="{{slika}}" alt="First slide">
 								</div>
 								<div class="carousel-item">
 								  <img class="d-block w-100" style="height:300px;max-width:600px;width: expression(this.width > 600 ? 600: true);" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPpAd3yRIIxi5z8WDn-vileb-mPEcjWNKTdZZzJ8tzc5GvLhIz" alt="Second slide">
@@ -63,15 +63,19 @@
 							<td>
 							<h4>Splošne informacije</h4>
 							<br>
-							<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png">
-							3  &nbsp;&nbsp; 
-							<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
-							2
+							%if st_samick != 0:
+								<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png">
+								{{st_samick}}  &nbsp;&nbsp;
+							%end
+							%if st_samckov != 0:
+								<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
+								{{st_samckov}}
+							%end
 							<br>
 							<br>
-							<p>Skotitev: 11.3.2004</p>
-							<p>Cena: 200 ‎€</p>
-							<p>Pes ima rodovnik, je veterinarsko oskrbljen, ni cepljen in ni kastriran.</p>
+							<p>Skotitev: {{skotitev}}</p>
+							<p>Cena: {{cena}}</p>
+							<p>Pes {{rodovnik}}, {{veterinarska_oskrba}} veterinarsko oskrbljen, {{cepljenje}} cepljen in {{kastracija_sterilizacija}} kastriran/steriliziran.</p>
 							</td>
 					    </tr>
 					</tbody>
@@ -82,12 +86,16 @@
 		<div>
 		<br>
 		<h4>Prodajalec o psu</h4>
-		<p>Pes je lep, mlad, nagajiv. Ima 4 šape in smrček.</p>
+		<p>{{opis}}</p>
 		<br>
 		<h4>Kontakni podatki</h4>
-		<p>Prodajalec prihaja iz Ljubljane ali okolice.</p>
-		<p>Telefonska številka:</p>
-		<p>Email:</p>
+		<p>Prodajalec prihaja iz {{regija}}.</p>
+		%if telefon != False:
+			<p>Telefonska številka: {{telefon}}</p>
+		%end
+		%if email != False:
+			<p>Email: {{email}}</p>
+		%end
 		</div>
 			
 		<div>

@@ -153,23 +153,16 @@ def prijava_post():
     username = request.forms.username
     password = request.forms.password
 
-    print(username, password)
+    cur.execute("SELECT uporabnisko_ime, geslo FROM uporabniki WHERE uporabnisko_ime='" + username + "' AND geslo='" + password + "'")
+    if cur.fetchone():
+        print("Najdeno")
+        response.set_cookie('username', username, path='/')
+        response.status = 303
+        response.set_header('Location', '/oglasi/')
     
-    cur.execute('''SELECT uporabnisko_ime, geslo FROM uporabniki''')
-    rows = cur.fetchall()
-    for row in rows:
-        ime, geslo = row
-
-        if ime == username and geslo == password:
-            print("Najdeno")
-            response.set_cookie('username', username, path='/')
-            response.status = 303
-            response.set_header('Location', '/oglasi/')
-            break
-
-        else:
-            print("Ni v bazi")
-            return redirect("/napaka/")
+    else:
+        print("Ni v bazi")
+        return redirect("/napaka/")
 
 
 @route('/registracija/', method='GET')
@@ -251,26 +244,113 @@ def registracija_post():
                                  '{0}'.format(naslov), '{0}'.format(postna_stevilka),
                                  '{0}'.format(email), '{0}'.format(telefon), '{0}'.format(uporabnik), '{0}'.format(geslo))
                 cur.execute("INSERT INTO uporabniki VALUES {0}".format(nov_uporabnik))
-                return redirect("/oglasi/")
+                response.set_cookie('username', username, path='/')
+                response.status = 303
+                response.set_header('Location', '/oglasi/')
 
 # Stran z oglasi
 @route('/oglasi/', method='GET')
 def oglasi_get():
     username = request.get_cookie('username')
-    return template('oglasi',
-                    username=username)
 
-@route('/oglasi/', method='POST')
-def oglasi_post():
-    username = request.get_cookie('username')
-    print(username)
+    oglasi = []
+    cur.execute('SELECT id_oglasa, id_uporabnika, cas_oddaje, id_pasme, cena, st_samick, st_samckov FROM oglas')
+    rows = cur.fetchall()
+    for row in rows:
+        id_oglasa, id_uporabnika, cas_oddaje, id_pasme, cena, st_samick, st_samckov = row
+        print(id_oglasa, id_uporabnika, cas_oddaje, id_pasme, cena, st_samick, st_samckov)
+
+        cur.execute("SELECT id_pasme, slovensko_ime, slike FROM pasma WHERE id_pasme={0}".format(id_pasme))
+        id_pasme, pasma, slika = cur.fetchone()
+
+        if cena != 0:
+            cena = str(cena) + '€'
+        else:
+            cena = 'Podarim'
+
+        #regija
+        cur.execute("SELECT id_uporabnika, posta FROM uporabniki WHERE id_uporabnika={0}".format(id_uporabnika))
+        id_uporabnika, posta = cur.fetchone()
+        cur.execute("SELECT postna_st, regija FROM posta WHERE postna_st={0}".format(posta))
+        posta, regija = cur.fetchone()
+        cur.execute("SELECT id, regija FROM regija WHERE id={0}".format(regija))
+        id_regije, regija = cur.fetchone()
+
+        oglasi.append((id_oglasa,slika,pasma,cena,regija,st_samick,st_samckov))        
+            
     return template('oglasi',
-                    username=username)
+                    username=username,
+                    oglasi=oglasi)
 
 # Stran z oglasom, njegovimi podrobnostmi in komentarji
-@route('/oglas/', method='GET')
-def oglas_get():
-    return template('oglas')
+@route('/oglas/<id_oglasa>', method='GET')
+def oglas_get(id_oglasa):
+    cur.execute('''SELECT id_oglasa, id_uporabnika, cas_oddaje, id_pasme, opis,
+                skotitev, cena, st_samick, st_samckov, rodovnik, veterinarska_oskrba,
+                cepljenje, kastracija_sterilizacija, telefon, email FROM oglas
+                WHERE id_oglasa={0}'''.format(id_oglasa))
+    [id_oglasa, id_uporabnika, cas_oddaje, id_pasme, opis, skotitev, cena, st_samick, st_samckov, rodovnik, veterinarska_oskrba, cepljenje, kastracija_sterilizacija, telefon, email] = cur.fetchone()
+
+    cur.execute("SELECT id_pasme, slovensko_ime, slike FROM pasma WHERE id_pasme={0}".format(id_pasme))
+    id_pasme, pasma, slika = cur.fetchone()
+
+    if cena != 0:
+        cena = str(cena) + '€'
+    else:
+        cena = 'Podarim'
+
+    #regija
+    cur.execute("SELECT id_uporabnika, posta FROM uporabniki WHERE id_uporabnika={0}".format(id_uporabnika))
+    id_uporabnika, posta = cur.fetchone()
+    cur.execute("SELECT postna_st, regija FROM posta WHERE postna_st={0}".format(posta))
+    posta, regija = cur.fetchone()
+    cur.execute("SELECT id, regija FROM regija WHERE id={0}".format(regija))
+    id_regije, regija = cur.fetchone()
+
+    #uporabnik
+    cur.execute('''SELECT id_uporabnika, email, stevilka FROM uporabniki
+                WHERE id_uporabnika={0}'''.format(id_uporabnika))
+    id_uporabnika, email_up, stevilka_up = cur.fetchone()
+    if email:
+        email = email_up
+    if telefon:
+        telefon = stevilka_up
+
+    if rodovnik:
+        rodovnik = 'ima rodovnik'
+    else:
+        rodovnik = 'nima rodovnika'
+
+    if veterinarska_oskrba:
+        veterinarska_oskrba = 'je'
+    else:
+        veterinarska_oskrba = 'ni'
+
+    if cepljenje:
+        cepljenje = 'je'
+    else:
+        cepljenje = 'ni'
+
+    if kastracija_sterilizacija:
+        kastracija_sterilizacija = 'je'
+    else:
+        kastracija_sterilizacija = 'ni'
+    
+    return template('oglas',
+                    pasma=pasma,
+                    slika=slika,
+                    st_samick=st_samick,
+                    st_samckov=st_samckov,
+                    skotitev=skotitev,
+                    cena=cena,
+                    rodovnik=rodovnik,
+                    veterinarska_oskrba=veterinarska_oskrba,
+                    cepljenje=cepljenje,
+                    kastracija_sterilizacija=kastracija_sterilizacija,
+                    opis=opis,
+                    regija=regija,
+                    telefon=telefon,
+                    email=email)
  
 @route('/oglas/', method='POST')
 def oglas_post():
@@ -279,7 +359,7 @@ def oglas_post():
 @route('/ustvari_oglas/', method='GET')
 def ustvari_oglas_get():
     cur.execute('''SELECT slovensko_ime, id_pasme FROM pasma ''')
-    rows = cur.fetchall() # prebere zgornji select in ga zapoše v rows v obliki
+    rows = cur.fetchall() # prebere zgornji select in ga zapiše v rows v obliki
     pasme = []
     for row in rows:
         pasma, id_pasme = row
