@@ -380,6 +380,7 @@ def oglas_get(id_oglasa):
                 ON uporabniki.id_uporabnika=komentar.id_uporabnika
                 WHERE komentar.id_oglasa={0}'''.format(id_oglasa))
     komentarji = cur.fetchall()
+    komantarji = komentarji.sort(key=lambda x: x[2])
         
     return template('oglas',
                     pasma=pasma,
