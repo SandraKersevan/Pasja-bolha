@@ -43,7 +43,7 @@
 		
 		<style type="text/css">
 			#wrap {
-			   width:800px;
+			   width:900px;
 			   margin:0 auto;
 			}
 			#left_col {
@@ -52,7 +52,7 @@
 			}
 			#right_col {
 			   float:right;
-			   width:400px;
+			   width:500px;
 			   align: left;
 			}
 		</style>
@@ -61,7 +61,7 @@
 		
 		<p style="text-align:left;">
 			<br>
-			Prijavljeni ste kot  <b><u>{{username}}</u> </b>
+			Prijavljeni ste kot  <b><u>{{username}}</u></b>
 			<br> 
 			<button href="/" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Začetna stran</button>
 			
@@ -72,10 +72,10 @@
 		
 		<center>
 		%for (id_oglasa,slika,pasma,cena,regija,st_samick,st_samckov) in oglasi:
-			<a href="/oglas/{{id_oglasa}}" style="display:block;width:800px; height:300px" target="_blank" align="center">
+			<a href="/oglas/{{id_oglasa}}" style="display:block;width:900px; height:300px" target="_blank" align="center">
 				<div id="wrap">
 					<div id="left_col">
-						<img style="height:280px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="{{slika}}"">
+						<img style="height:280px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="{{slika}}">
 					</div>
 				
 					<div id="right_col">

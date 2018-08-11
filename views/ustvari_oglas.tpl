@@ -32,7 +32,7 @@
 		<div class="form-row">
 			<label for="inputBreed" class="form-text">Pasma</label>
 			<select id="inputBreed" class="form-control" name="pasma" required>
-				<option selected>Izberi..</option>
+				<option selected value="300">Izberi...</option>
 					%for (pasma, id_pasme) in pasme:
 						<option value={{id_pasme}}>{{pasma}}</option>
 					%end
@@ -97,18 +97,6 @@
 				<input type="number" value="0" min='0' class="form-control" id="inputMale" name="samcki" oninput="check(this)" required>
 			</div>
 		</div>
-		
-			<script language='javascript' type='text/javascript'>
-				function check(input) {
-					if (document.getElementById('inputFemale').value == 0 && document.getElementById('inputMale').value == 0) {
-						input.setCustomValidity('Oglas mora vsebovati vsaj eno žival.');
-					} else {
-						// input is valid -- reset the error message
-						input.setCustomValidity('');
-							}
-					}
-			</script>
-		
 		
 		<div class="form-row">
 			<div class="form-group col-md-4">
@@ -215,7 +203,7 @@
 					<input type="radio" name="email" id="emailda" value="da" autocomplete="off" checked="checked"> Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="email" id="emailne" value="ne" autocomplete="off" onclick="checki(this)"> Ne
+					<input type="radio" name="email" id="emailne" value="ne" autocomplete="off"> Ne
 				</label>
 			</div>
 			</div>
@@ -232,36 +220,55 @@
 					<input type="radio" name="telefon" id="telefonda" value="da" autocomplete="off" checked="checked"> Da
 				</label>
 				<label class="btn btn-secondary">
-					<input type="radio" name="telefon" id="telefonne" value="ne" autocomplete="off" onclick="checki(this)"> Ne
+					<input type="radio" name="telefon" id="telefonne" value="ne" autocomplete="off"> Ne
 				</label>
 			</div>
 			</div>
+		</div>	
+		<br>
+		<div>
+			<button href="/oglasi/" class="btn btn-outline-secondary btn-lg" style="float: right;" onclick="check(this); check2(this); check3(this)" role="button" aria-pressed="true">Oddaj oglas</button>
 		</div>
 		
+		<br>
+		<br>
+		<br>
+	</form>
+
+	</form>
+	
 			<script language='javascript' type='text/javascript'>
-				function checki(input) {
-					if (document.getElementById('emailne').checked && document.getElementById('telefonne').checked) {
-						alert("One must be yes.");
-						input.setCustomValidity('One must be yes.');
+				function check(input) {
+					const inputBreedElm = document.getElementById('inputBreed');
+					if (inputBreedElm.value == "300") {
+						inputBreedElm.setCustomValidity('Izberi pasmo.');
 					} else {
 						// input is valid -- reset the error message
-						input.setCustomValidity('');
+						inputBreedElm.setCustomValidity('');
+					}
+				}
+				
+				function check2(input) {
+					const inputSexElm = document.getElementById('inputMale');
+					if (document.getElementById('inputFemale').value == 0 && document.getElementById('inputMale').value == 0) {
+						inputSexElm.setCustomValidity('Oglas mora vsebovati vsaj eno žival.');
+					} else {
+						// input is valid -- reset the error message
+						inputSexElm.setCustomValidity('');
+							}
+					}
+				
+				function check3(input) {
+					const inputPhoneElm = document.getElementById('telefonne');
+					if (document.getElementById('emailne').checked && document.getElementById('telefonne').checked) {
+						// alert("One must be yes.");
+						inputPhoneElm.setCustomValidity('Vsaj eden mora biti da.');
+					} else {
+						// input is valid -- reset the error message
+						inputPhoneElm.setCustomValidity('');
 							}
 					}
 			</script>
-		
-		<br>
-
-		<div>
-			<button href="/oglasi/" class="btn btn-outline-secondary btn-lg" style="float: right;" onclick="check(this)" role="button" aria-pressed="true">Oddaj oglas</button>
-		</div>
-		
-		<br>
-		<br>
-		<br>
-	</form>
-
-	</form>
 	</div> <!-- /container -->
 
     <!-- Optional JavaScript -->

@@ -104,18 +104,19 @@
 		<br>
 		
 		<div>
-			<button href="/oglasi/" type="submit" class="btn btn-outline-secondary" role="button" aria-pressed="true" onclick="check(this)">Registriraj se</button>
+			<button href="/oglasi/" type="submit" class="btn btn-outline-secondary" role="button" aria-pressed="true" onclick="check2(this)">Registriraj se</button>
 		</div>
 		
 		<script language='javascript' type='text/javascript'>
-				function check(input) {
-					if (document.getElementById('inputState').value == "0") {
-						input.setCustomValidity('Izberi pošto.');
+				function check2(input) {
+					const inputStateElm = document.getElementById('inputState');
+					if (inputStateElm.value == "0") {
+						inputStateElm.setCustomValidity('Izberi pošto.');
 					} else {
 						// input is valid -- reset the error message
 						input.setCustomValidity('');
-							}
 					}
+				}
 		</script>
 		<br>
 	</form>
