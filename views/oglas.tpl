@@ -21,8 +21,6 @@
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 		
-		
-			
 		<div id="wrap">
 		<table id="tabela">
    	          		<colgroup>
@@ -99,34 +97,35 @@
 		<div>
 		<br>
 		<h3>Komentarji</h3>
-		<p>Še ni oddanih komentarjev.</p>
-		<table class="table table-striped"  width="100%">
-			<col width="20%">
-			<col width="80%">
-			<tbody>
-				<tr>
-					<td scope="row"><b>Uporabniško ime</b><br /> <small>4.8.2018</small> </td>
-					<td>Lep pes. Je še na voljo?</td>
-				</tr>
-				<tr>
-					<td scope="row"><b>Uporabniško ime</b><br /> <small>5.8.2018</small> </td>
-					<td>Žal so vsi oddani.</td>
-				</tr>
-				<tr>
-					<td scope="row"><b>Uporabniško ime</b><br /> <small>6.8.2018</small> </td>
-					<td>American Bulldogs are generally happy, family-loving dogs that do well in homes where they have plenty of space to roam. A big, fenced-in backyard is practically a must-have for one of these energetic dogs, though exercise needs may vary by specific type and breeding. They may be just fine with urban life, so long as they get plenty of walks, and they can even make good jogging or running buddies. They do not, however, take very well to being left alone for long periods of time, and they can feel cooped up in an apartment. If their physical and mental stimulation needs aren't met, they can become bored and destructive. American Bulldogs need experienced owners who can be patient with training and start socialization early. So long as they are well trained, they'll get along just fine with children and other pets, though it is still important to supervise them as you would with any dog. Whether they are used for hunting and farm work or just cuddling up with their humans, the American Bulldog makes for an excellent, loyal companion and a competent watchdog.</td>
-				</tr>
-			</tbody>
-		</table>
+		%if komentarji == []:
+			<p>Še ni oddanih komentarjev.</p>
+		%end
+		%if komentarji != []:
+			<table class="table table-striped"  width="100%">
+				<col width="20%">
+				<col width="80%">
+				<tbody>
+				%for [uporabnisko_ime, vsebina, cas_oddaje] in komentarji:
+					<tr>
+						<td scope="row"><b>{{uporabnisko_ime}}</b><br /> <small>{{cas_oddaje}}</small> </td>
+						<td>{{vsebina}}</td>
+					</tr>
+				%end
+				</tbody>
+			</table>
+		%end
 		<br>
+		<form method="post" action="/oglas/{{id_oglasa}}">
 		<input type="comment" class="form-control" id="comment" placeholder="Napiši komantar..." name="comment">
 		<span style="float:right;">
-				<button class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Oddaj komentar</button>
+				<button class="btn btn-outline-secondary btn-sm" type="submit" role="button" aria-pressed="true">Oddaj komentar</button>
 		</span>
+		</form>
 		<br>
 		<br>
 		</div>
 	</tbody>
+	      
 	
 
     

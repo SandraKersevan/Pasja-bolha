@@ -373,7 +373,14 @@ def oglas_get(id_oglasa):
         kastracija_sterilizacija = 'je'
     else:
         kastracija_sterilizacija = 'ni'
-    
+
+    # komentariji
+    cur.execute('''SELECT uporabniki.uporabnisko_ime, komentar.vsebina,
+                komentar.cas_oddaje FROM komentar INNER JOIN uporabniki
+                ON uporabniki.id_uporabnika=komentar.id_uporabnika
+                WHERE komentar.id_oglasa={0}'''.format(id_oglasa))
+    komentarji = cur.fetchall()
+        
     return template('oglas',
                     pasma=pasma,
                     slika=slika,
@@ -388,11 +395,32 @@ def oglas_get(id_oglasa):
                     opis=opis,
                     regija=regija,
                     telefon=telefon,
-                    email=email)
+                    email=email,
+                    komentarji=komentarji,
+                    id_oglasa=id_oglasa)
  
-@route('/oglas/', method='POST')
-def oglas_post():
-    return template('oglas')
+@route('/oglas/<id_oglasa>', method='POST')
+def oglas_post(id_oglasa):
+    print('Nov komentar')
+    
+    vsebina = request.forms.comment
+
+    # Iz baze preberemo id_uporabnika
+    uporabnik = request.get_cookie('username')
+    cur.execute("SELECT id_uporabnika FROM uporabniki WHERE uporabnisko_ime='" + uporabnik + "'")
+    [[id_uporabnika]] = cur.fetchall()
+    id_uporabnika = int(id_uporabnika)
+ 
+    cas_oddaje = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # id_komentarja
+    cur.execute("SELECT COUNT(*) FROM komentar")
+    [[stevilo_komentarjev]] = cur.fetchall()
+    id_komentarja = int(stevilo_komentarjev)+1
+
+    komentar = (id_komentarja, id_uporabnika, id_oglasa, vsebina, cas_oddaje)
+    cur.execute('''INSERT INTO komentar VALUES {0}'''.format(komentar))
+    return redirect('/oglas/{0}'.format(id_oglasa))
 
 @route('/ustvari_oglas/', method='GET')
 def ustvari_oglas_get():
