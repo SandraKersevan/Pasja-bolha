@@ -35,30 +35,12 @@
 					</colgroup>
 					
 					<tbody>
+					%for (ime, slika) in psi:
 						<tr>
-							<td><img src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0"></td>
-							<td>Pasma 1</td>
+							<td><img src="{{slika}}"></td>
+							<td>{{ime}}</td>
 					    </tr>
-						
-					    <tr>
-							<td><img src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0"></td>
-							<td>Pasma 2</td>					    
-						</tr>
-						
-						<tr>
-							<td><img src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0"></td>
-							<td>Pasma 3</td>
-					    </tr>
-						
-					    <tr>
-							<td><img src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0"></td>
-							<td>Pasma 4</td>
-					    </tr>
-												
-						<tr>
-							<td><img src="https://img.etsystatic.com/il/6b3d98/532133417/il_570xN.532133417_naa2.jpg?version=0"></td>
-							<td>Pasma 5</td>
-					    </tr>
+					%end
 					</tbody>
 				</table>
 				<br>	

@@ -63,7 +63,7 @@
 			<br>
 			Prijavljeni ste kot  <b><u>{{username}}</u> </b>
 			<br> 
-			<button href="" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Začetna stran</button>
+			<button href="/" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Začetna stran</button>
 			
 			<span style="float:right;">
 				<button href="/ustvari_oglas/" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Ustvari oglas</button>

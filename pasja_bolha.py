@@ -63,6 +63,7 @@ def static(filename):
 # Glavna stran
 @route('/')
 def zacetna_stran():
+    response.delete_cookie('username')
     return template('zacetna_stran')
 
 # Strani za napake
@@ -131,8 +132,45 @@ def izbira_psa_post():
 @route('/idealni_psi/', method='GET')
 def idealni_psi_get():
     izbrano = request.get_cookie('izbrano', secret=secret)
+    vsota = sum(izbrano)
+
+    primerni = []
+    
+    lastnosti = ['primernost_za_stanovanja', 'primernost_za_zacetnike',
+                 'obcutljivost', 'prenese_samoto','primernost_za_hladno_podnebje',
+                 'primernost_za_toplo_podnebje','primernost_za_druzine',
+                 'prijaznost_do_otrok', 'prijaznost_do_drugih_psov',
+                 'prijaznost_do_tujcev','izpadanje_dlake', 'slinjenje',
+                 'nezahtevnost_dlake', 'splosno_zdravje', 'potencial_za_debelost',
+                 'velikost', 'ucljivost', 'inteligenca', 'grizenje', 'lovski_pes',
+                 'lajanje', 'potepanje', 'potreba_po_gibanju', 'energicnost',
+                 'intenzivnost', 'igrivost']
+    
+    cur.execute('''SELECT id_pasme, primernost_za_stanovanja, primernost_za_zacetnike,
+                 obcutljivost, prenese_samoto, primernost_za_hladno_podnebje,
+                 primernost_za_toplo_podnebje, primernost_za_druzine, prijaznost_do_otrok,
+                 prijaznost_do_drugih_psov, prijaznost_do_tujcev, izpadanje_dlake, slinjenje,
+                 nezahtevnost_dlake, splosno_zdravje, potencial_za_debelost, velikost,
+                 ucljivost, inteligenca, grizenje, lovski_pes, lajanje, potepanje, potreba_po_gibanju,
+                 energicnost, intenzivnost, igrivost FROM pasma''')
+    rows = cur.fetchall()
+    for row in rows:
+        row = [int(x) for x in row]
+        razlika_pasme = abs(sum(row[1:]) - vsota)
+        primerni.append((row[0], razlika_pasme))
+    primerni.sort(key=lambda x: x[1])
+    primerni = primerni[0:10] #prikaze prvih 10
+
+    psi = []
+    for pes in primerni:
+        (id_psa, razlika) = pes
+        print(id_psa)
+        cur.execute('''SELECT slovensko_ime, slike FROM pasma WHERE id_pasme={0}'''.format(id_psa))
+        ime, slika = cur.fetchone()
+        psi.append((ime, slika))
     return template('idealni_psi',
-                    izbrano=izbrano)
+                    izbrano=izbrano,
+                    psi=psi)
 
 @route('/idealni_psi/', method='POST')
 def idealni_psi_post():
