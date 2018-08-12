@@ -330,19 +330,22 @@ def oglasi_get(stran):
     oglasi = oglasi[::-1]
 
     # stevilo strani
-    if len(oglasi)%10 == 0:
-        st_strani = len(oglasi)//10
+    if len(oglasi)%5 == 0:
+        st_strani = len(oglasi)//5
     else:
-        st_strani = len(oglasi)//10 + 1
+        st_strani = len(oglasi)//5 + 1
 
-    # vzamemo 10 oglasov
+    sez_st_strani = list(range(1,st_strani+1))
+
+    # vzamemo 5 oglasov
     stran = int(stran)
-    oglasi = oglasi[(stran-1)*10:stran*10]
+    oglasi = oglasi[(stran-1)*5:stran*5]
+    
          
     return template('oglasi',
                     username=username,
                     oglasi=oglasi,
-                    st_strani=st_strani)
+                    sez_st_strani=sez_st_strani)
 
 # Stran z oglasom, njegovimi podrobnostmi in komentarji
 @route('/oglas/<id_oglasa>', method='GET')

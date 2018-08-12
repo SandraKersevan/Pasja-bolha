@@ -57,14 +57,26 @@
 			}
 		</style>
 		
-		<p style="text-align:left;">
-			<br>
+		<br>
+		<center>
+		<table border="0" width="100%">
+		<colgroup>
+			<col style="width:50%">
+			<col style="width:50%">
+		</colgroup>
+		  <tr>
+			<td height="20">
 			Prijavljeni ste kot  <b><u>{{username}}</u></b> 
+			</td>
+			<td height="20">
 			<form method="get" action="/ustvari_oglas/">
 			<span style="float:right;">
 				<button class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Ustvari oglas</button>
-			</span>
-		</p>
+			</span>	
+			</td>
+		  </tr>
+		</table>
+		</center>
 		
 		<form class="form-signin" role="form" method="post" action=".">
 		
@@ -98,8 +110,22 @@
 		<br>
 		%end
 		</center>
+		
+		<br>
+		
 
-			
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="#" style="display:initial;background-color:transparent;border:0">&laquo;</a></li>
+			%for stevilo in sez_st_strani:
+			<li class="page-item"><a class="page-link" href="#" style="display:initial;background-color:transparent;border:0">{{stevilo}}</a></li>
+			%end
+			<li class="page-item"><a class="page-link" href="#" style="display:initial;background-color:transparent;border:0">&raquo;</a></li>
+		  </ul>
+		</nav>
+		
+		<br>
+		<br>
 	</tbody>
 	
 
