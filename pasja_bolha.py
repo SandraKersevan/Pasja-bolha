@@ -24,6 +24,7 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 print ("Connected!\n")
 
 secret = "to skrivnost je zelo tezko uganiti 1094107c907cw982982c42"
+
 ######################################################################
 # Pomozne funkcije:
 
@@ -302,7 +303,7 @@ def oglasi_get():
         id_pasme, pasma, slika = cur.fetchone()
 
         if cena != 0:
-            cena = str(cena) + '€'
+            cena = str(cena) + ' €'
         else:
             cena = 'Podarim'
 
@@ -327,13 +328,17 @@ def oglas_get(id_oglasa):
                 skotitev, cena, st_samick, st_samckov, rodovnik, veterinarska_oskrba,
                 cepljenje, kastracija_sterilizacija, telefon, email FROM oglas
                 WHERE id_oglasa={0}'''.format(id_oglasa))
-    [id_oglasa, id_uporabnika, cas_oddaje, id_pasme, opis, skotitev, cena, st_samick, st_samckov, rodovnik, veterinarska_oskrba, cepljenje, kastracija_sterilizacija, telefon, email] = cur.fetchone()
+    [id_oglasa, id_uporabnika, cas_oddaje, id_pasme, opis, skotitev, cena, st_samick, st_samckov,
+     rodovnik, veterinarska_oskrba, cepljenje, kastracija_sterilizacija, telefon, email] = cur.fetchone()
 
-    cur.execute("SELECT id_pasme, slovensko_ime, slike FROM pasma WHERE id_pasme={0}".format(id_pasme))
-    id_pasme, pasma, slika = cur.fetchone()
+    [leto,mesec,dan] = str(skotitev).split('-')
+    skotitev = dan + '.' + mesec + '.' + leto
+
+    cur.execute("SELECT id_pasme, slovensko_ime, anglesko_ime, slike FROM pasma WHERE id_pasme={0}".format(id_pasme))
+    id_pasme, pasma, anglesko_ime, slika = cur.fetchone()
 
     if cena != 0:
-        cena = str(cena) + '€'
+        cena = str(cena) + ' €'
     else:
         cena = 'Podarim'
 
@@ -381,9 +386,18 @@ def oglas_get(id_oglasa):
                 WHERE komentar.id_oglasa={0}'''.format(id_oglasa))
     komentarji = cur.fetchall()
     komantarji = komentarji.sort(key=lambda x: x[2])
+    popravljeni_komentarji = []
+    for [uporabnisko_ime, vsebina, cas_oddaje] in komentarji:
+        [datum, ura] = str(cas_oddaje).split()
+        ura = ura[:-3]
+        [leto,mesec,dan] = datum.split('-')
+        datum = dan + '.' + mesec + '.' + leto
+        cas_oddaje2 = datum + ' ob ' + ura
+        popravljeni_komentarji.append([uporabnisko_ime, vsebina, cas_oddaje2])
         
     return template('oglas',
                     pasma=pasma,
+                    anglesko_ime=anglesko_ime,
                     slika=slika,
                     st_samick=st_samick,
                     st_samckov=st_samckov,
@@ -397,7 +411,7 @@ def oglas_get(id_oglasa):
                     regija=regija,
                     telefon=telefon,
                     email=email,
-                    komentarji=komentarji,
+                    popravljeni_komentarji=popravljeni_komentarji,
                     id_oglasa=id_oglasa)
  
 @route('/oglas/<id_oglasa>', method='POST')

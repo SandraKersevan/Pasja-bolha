@@ -9,75 +9,53 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 		<title>{{pasma}}</title>
-		<link rel="stylesheet" href="/static/idealni_psi.css" type="text/css"/> 
+		<link rel="stylesheet" href="/static/oglas.css" type="text/css"/> 
 	</head>
   
 	<body>
 		<div id="glava">
-			<b>PASJA BOLHA</b>
+			<b><a href="http://localhost:8080/" style="color:black">PASJA BOLHA</a></b>
 		</div>
 		<h1>{{pasma}}</h1>
 		<div id="vsebina">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 		
-		<div id="wrap">
-		<table id="tabela">
-   	          		<colgroup>
-						<col style="width:50%">
-						<col style="width:50%">
-					</colgroup>
-					
-					<tbody>
-						<tr>
-							<td>
-							<center>
-							<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-							  <div class="carousel-inner">
-								<div class="carousel-item active">
-								  <img class="d-block w-100" style="height:300px;max-width:600px;width: expression(this.width > 600 ? 600: true);" src="{{slika}}" alt="First slide">
-								</div>
-								<div class="carousel-item">
-								  <img class="d-block w-100" style="height:300px;max-width:600px;width: expression(this.width > 600 ? 600: true);" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPpAd3yRIIxi5z8WDn-vileb-mPEcjWNKTdZZzJ8tzc5GvLhIz" alt="Second slide">
-								</div>
-								<div class="carousel-item">
-								  <img class="d-block w-100" style="height:300px;max-width:600px;width: expression(this.width > 600 ? 600: true);" src="http://suggestnepal.com/wp-content/uploads/2014/08/kabini-image3.jpg" alt="Third slide">
-								</div>
-							  </div>
-							  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="sr-only">Previous</span>
-							  </a>
-							  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="sr-only">Next</span>
-							  </a>
-							</div>
-							</center>
-							</td>
+		
+		<br>
+		<center>
+		<table border="0" width="100%">
+		<colgroup>
+			<col style="width:50%">
+			<col style="width:50%">
+		</colgroup>
+		  <tr>
+			<td height="350" width="500">
+			<center>
+			<img style="max-height:350px;max-width:500px;width:auto;height:auto;" src="{{slika}}" alt="First slide">
+			</center>
+			</td>
+			<td height="350" margin-left: 10px>
+				<h4>Splošne informacije</h4>
+				<br>
+				%if st_samick != 0:
+					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png">
+					{{st_samick}}  &nbsp;&nbsp;
+				%end
+				%if st_samckov != 0:
+					<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
+					{{st_samckov}}
+				%end
+				<br>
+				<br>
+				<p>Skotitev: {{skotitev}}</p>
+				<p>Cena: {{cena}}</p>
+				<p>Pes {{rodovnik}}, {{veterinarska_oskrba}} veterinarsko oskrbljen, {{cepljenje}} cepljen in {{kastracija_sterilizacija}} kastriran/steriliziran.</p>					<p>Več o pasmi si lahko preberete <a href="https://dogtime.com/dog-breeds/{{anglesko_ime}}#/slide/1" style="color:grey">tukaj</a>.</p>
 							
-							<td>
-							<h4>Splošne informacije</h4>
-							<br>
-							%if st_samick != 0:
-								<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png">
-								{{st_samick}}  &nbsp;&nbsp;
-							%end
-							%if st_samckov != 0:
-								<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">
-								{{st_samckov}}
-							%end
-							<br>
-							<br>
-							<p>Skotitev: {{skotitev}}</p>
-							<p>Cena: {{cena}}</p>
-							<p>Pes {{rodovnik}}, {{veterinarska_oskrba}} veterinarsko oskrbljen, {{cepljenje}} cepljen in {{kastracija_sterilizacija}} kastriran/steriliziran.</p>
-							</td>
-					    </tr>
-					</tbody>
-				</table>
-	
-		</div>
+			</td>
+		  </tr>
+		</table>
+		</center>
 		
 		<div>
 		<br>
@@ -97,15 +75,15 @@
 		<div>
 		<br>
 		<h3>Komentarji</h3>
-		%if komentarji == []:
+		%if popravljeni_komentarji == []:
 			<p>Še ni oddanih komentarjev.</p>
 		%end
-		%if komentarji != []:
+		%if popravljeni_komentarji != []:
 			<table class="table table-striped"  width="100%">
 				<col width="20%">
 				<col width="80%">
 				<tbody>
-				%for [uporabnisko_ime, vsebina, cas_oddaje] in komentarji:
+				%for [uporabnisko_ime, vsebina, cas_oddaje] in popravljeni_komentarji:
 					<tr>
 						<td scope="row"><b>{{uporabnisko_ime}}</b><br /> <small>{{cas_oddaje}}</small> </td>
 						<td>{{vsebina}}</td>

@@ -38,16 +38,3 @@ div#sporocilo {
     border: 1px solid red;
     padding: 5px;
 }
-
-#tabela table, tr, td, th {
-     border: 0;
-	 background-color: White;
-	 padding: 15px;
-	 width: 800px;
-}
-
-img {
-    max-width: 100%;
-    max-height: 100%;
-}
-

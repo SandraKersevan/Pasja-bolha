@@ -14,7 +14,7 @@
   
   <body>
     <div id="glava">
-		<b>PASJA BOLHA</b>
+		<b><a href="http://localhost:8080/" style="color:black">PASJA BOLHA</a></b>
     </div>
     <h1>Ustvari oglas</h1>
     <div id="vsebina">
