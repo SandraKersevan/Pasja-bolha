@@ -116,11 +116,21 @@
 
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="#" style="display:initial;background-color:transparent;border:0">&laquo;</a></li>
-			%for stevilo in sez_st_strani:
-			<li class="page-item"><a class="page-link" href="#" style="display:initial;background-color:transparent;border:0">{{stevilo}}</a></li>
+			%if stran == 1:
+			<li class="page-item"><a class="page-link" href="{{stran}}" style="display:initial;background-color:transparent;border:0">&laquo;</a></li>
 			%end
-			<li class="page-item"><a class="page-link" href="#" style="display:initial;background-color:transparent;border:0">&raquo;</a></li>
+			%if stran != 1:
+			<li class="page-item"><a class="page-link" href="{{stran-1}}" style="display:initial;background-color:transparent;border:0">&laquo;</a></li>
+			%end
+			%for stevilo in range(1,st_strani+1):
+				<li class="page-item"><a class="page-link" href="{{stevilo}}" style="display:initial;background-color:transparent;border:0">{{stevilo}}</a></li>
+			%end
+			%if stran == st_strani:
+			<li class="page-item"><a class="page-link" href="{{stran}}" style="display:initial;background-color:transparent;border:0">&raquo;</a></li>
+			%end
+			%if stran != st_strani:
+			<li class="page-item"><a class="page-link" href="{{stran+1}}" style="display:initial;background-color:transparent;border:0">&raquo;</a></li>
+			%end
 		  </ul>
 		</nav>
 		

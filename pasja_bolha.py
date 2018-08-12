@@ -89,32 +89,32 @@ def izbira_psa_get():
 
 @route('/izbira_psa/', method='POST')
 def izbira_psa_post():
-    notranjost = request.query.get('notranjost')
-    izkusnje = request.query.get('izkusnje')
-    obcutljivost = request.query.get('obcutljivost')
-    samota = request.query.get('samota')
-    hladno = request.query.get('hladno')
-    toplo = request.query.get('toplo')
-    druzina = request.query.get('druzina')
-    otroci = request.query.get('otroci')
-    drugi_psi = request.query.get('drugi_psi')
-    tujci = request.query.get('tujci')
-    dlaka = request.query.get('dlaka')
-    slinjenje = request.query.get('slinjenje')
-    dlaka_skrb = request.query.get('dlaka_skrb')
-    zdravje = request.query.get('zdravje')
-    debelost = request.query.get('debelost')
-    velikost = request.query.get('velikost')
-    ucljivost = request.query.get('ucljivost')
-    inteligenca = request.query.get('inteligenca')
-    grizenje = request.query.get('grizenje')
-    lovski_nagon = request.query.get('lovski_nagon')
-    lajanje = request.query.get('lajanje')
-    potepanje = request.query.get('potepanje')
-    energicnost = request.query.get('energicnost')
-    utrujenost = request.query.get('utrujenost')
-    gibanje = request.query.get('gibanje')
-    igrivost =  request.query.get('igrivost')
+    notranjost = request.forms.notranjost
+    izkusnje = request.forms.izkusnje
+    obcutljivost = request.forms.obcutljivost
+    samota = request.forms.samota
+    hladno = request.forms.hladno
+    toplo = request.forms.toplo
+    druzina = request.forms.druzina
+    otroci = request.forms.otroci
+    drugi_psi = request.forms.drugi_psi
+    tujci = request.forms.tujci
+    dlaka = request.forms.dlaka
+    slinjenje = request.forms.slinjenje
+    dlaka_skrb = request.forms.dlaka_skrb
+    zdravje = request.forms.zdravje
+    debelost = request.forms.debelost
+    velikost = request.forms.velikost
+    ucljivost = request.forms.ucljivost
+    inteligenca = request.forms.inteligenca
+    grizenje = request.forms.grizenje
+    lovski_nagon = request.forms.lovski_nagon
+    lajanje = request.forms.lajanje
+    potepanje = request.forms.potepanje
+    energicnost = request.forms.energicnost
+    utrujenost = request.forms.utrujenost
+    gibanje = request.forms.gibanje
+    igrivost =  request.forms.igrivost
     izbrano = [stevilka(notranjost), stevilka(izkusnje), stevilka(obcutljivost),
                stevilka(samota), stevilka(hladno), stevilka(toplo), stevilka(druzina),
                stevilka(otroci), stevilka(drugi_psi), stevilka(tujci), stevilka(dlaka),
@@ -335,8 +335,6 @@ def oglasi_get(stran):
     else:
         st_strani = len(oglasi)//5 + 1
 
-    sez_st_strani = list(range(1,st_strani+1))
-
     # vzamemo 5 oglasov
     stran = int(stran)
     oglasi = oglasi[(stran-1)*5:stran*5]
@@ -345,7 +343,8 @@ def oglasi_get(stran):
     return template('oglasi',
                     username=username,
                     oglasi=oglasi,
-                    sez_st_strani=sez_st_strani)
+                    st_strani=st_strani,
+                    stran=stran)
 
 # Stran z oglasom, njegovimi podrobnostmi in komentarji
 @route('/oglas/<id_oglasa>', method='GET')
