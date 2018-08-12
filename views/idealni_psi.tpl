@@ -14,7 +14,7 @@
   
 	<body>
 		<div id="glava">
-			<b><a href="http://localhost:8080/" style="color:black">PASJA BOLHA</a></b>
+			<b><a href="../" style="color:black">PASJA BOLHA</a></b>
 		</div>
 		<h1>Idealni psi za vas</h1>
 		<div id="vsebina">
@@ -35,10 +35,10 @@
 					</colgroup>
 					
 					<tbody>
-					%for (ime, slika) in psi:
+					%for (ime, ang_ime, slika) in psi:
 						<tr>
 							<td><img src="{{slika}}"></td>
-							<td>{{ime}}</td>
+							<td><a href="https://dogtime.com/dog-breeds/{{ang_ime}}#/slide/1" style="color:grey">{{ime}}</a></td>
 					    </tr>
 					%end
 					</tbody>

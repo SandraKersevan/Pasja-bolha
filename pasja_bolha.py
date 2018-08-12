@@ -64,7 +64,9 @@ def static(filename):
 # Glavna stran
 @route('/')
 def zacetna_stran():
+    # izbrišemo uporabnika in izbiro idealnega psa
     response.delete_cookie('username')
+    response.delete_cookie('izbrano')
     return template('zacetna_stran')
 
 # Strani za napake
@@ -133,6 +135,11 @@ def izbira_psa_post():
 @route('/idealni_psi/', method='GET')
 def idealni_psi_get():
     izbrano = request.get_cookie('izbrano', secret=secret)
+
+    # preverimo izbiro
+    if izbrano==None:
+        return redirect('/izbira_psa/')
+        
     vsota = sum(izbrano)
 
     primerni = []
@@ -165,10 +172,10 @@ def idealni_psi_get():
     psi = []
     for pes in primerni:
         (id_psa, razlika) = pes
-        print(id_psa)
-        cur.execute('''SELECT slovensko_ime, slike FROM pasma WHERE id_pasme={0}'''.format(id_psa))
-        ime, slika = cur.fetchone()
-        psi.append((ime, slika))
+        cur.execute('''SELECT slovensko_ime, anglesko_ime, slike FROM pasma
+                    WHERE id_pasme={0}'''.format(id_psa))
+        ime, ang_ime, slika = cur.fetchone()
+        psi.append((ime, ang_ime, slika))
     return template('idealni_psi',
                     izbrano=izbrano,
                     psi=psi)
@@ -197,7 +204,7 @@ def prijava_post():
         print("Najdeno")
         response.set_cookie('username', username, path='/')
         response.status = 303
-        response.set_header('Location', '/oglasi/')
+        response.set_header('Location', '/oglasi/1')
     
     else:
         print("Ni v bazi")
@@ -285,22 +292,25 @@ def registracija_post():
                 cur.execute("INSERT INTO uporabniki VALUES {0}".format(nov_uporabnik))
                 response.set_cookie('username', username, path='/')
                 response.status = 303
-                response.set_header('Location', '/oglasi/')
+                response.set_header('Location', '/oglasi/1')
 
 # Stran z oglasi
-@route('/oglasi/', method='GET')
-def oglasi_get():
+@route('/oglasi/<stran>', method='GET')
+def oglasi_get(stran):
     username = request.get_cookie('username')
+    # preverimo, če je kdo prijavljen
+    if username==None:
+        return redirect('/prijava/')
 
     oglasi = []
-    cur.execute('SELECT id_oglasa, id_uporabnika, cas_oddaje, id_pasme, cena, st_samick, st_samckov FROM oglas')
+    cur.execute('''SELECT id_oglasa, id_uporabnika, cas_oddaje, id_pasme, cena,
+                st_samick, st_samckov FROM oglas''')
     rows = cur.fetchall()
     for row in rows:
         id_oglasa, id_uporabnika, cas_oddaje, id_pasme, cena, st_samick, st_samckov = row
-        print(id_oglasa, id_uporabnika, cas_oddaje, id_pasme, cena, st_samick, st_samckov)
-
-        cur.execute("SELECT id_pasme, slovensko_ime, slike FROM pasma WHERE id_pasme={0}".format(id_pasme))
-        id_pasme, pasma, slika = cur.fetchone()
+        
+        cur.execute("SELECT slovensko_ime, slike FROM pasma WHERE id_pasme={0}".format(id_pasme))
+        pasma, slika = cur.fetchone()
 
         if cena != 0:
             cena = str(cena) + ' €'
@@ -308,34 +318,54 @@ def oglasi_get():
             cena = 'Podarim'
 
         #regija
-        cur.execute("SELECT id_uporabnika, posta FROM uporabniki WHERE id_uporabnika={0}".format(id_uporabnika))
-        id_uporabnika, posta = cur.fetchone()
-        cur.execute("SELECT postna_st, regija FROM posta WHERE postna_st={0}".format(posta))
-        posta, regija = cur.fetchone()
-        cur.execute("SELECT id, regija FROM regija WHERE id={0}".format(regija))
-        id_regije, regija = cur.fetchone()
+        cur.execute('''SELECT regija.regija FROM uporabniki
+                    INNER JOIN posta ON uporabniki.posta=posta.postna_st
+                    INNER JOIN regija ON posta.regija=regija.id
+                    WHERE uporabniki.id_uporabnika={0}'''.format(id_uporabnika))
+        [regija] = cur.fetchone()
 
-        oglasi.append((id_oglasa,slika,pasma,cena,regija,st_samick,st_samckov))        
-            
+        oglasi.append((cas_oddaje,id_oglasa,slika,pasma,cena,regija,st_samick,st_samckov))        
+
+    # uredimo oglase od najnovejšega do najstarejšega
+    oglasi = oglasi[::-1]
+
+    # stevilo strani
+    if len(oglasi)%10 == 0:
+        st_strani = len(oglasi)//10
+    else:
+        st_strani = len(oglasi)//10 + 1
+
+    # vzamemo 10 oglasov
+    stran = int(stran)
+    oglasi = oglasi[(stran-1)*10:stran*10]
+         
     return template('oglasi',
                     username=username,
-                    oglasi=oglasi)
+                    oglasi=oglasi,
+                    st_strani=st_strani)
 
 # Stran z oglasom, njegovimi podrobnostmi in komentarji
 @route('/oglas/<id_oglasa>', method='GET')
 def oglas_get(id_oglasa):
-    cur.execute('''SELECT id_oglasa, id_uporabnika, cas_oddaje, id_pasme, opis,
+    # preverimo, če je kdo prijavljen
+    username = request.get_cookie('username')
+    if username==None:
+        return redirect('/prijava/')
+    
+    cur.execute('''SELECT id_uporabnika, cas_oddaje, id_pasme, opis,
                 skotitev, cena, st_samick, st_samckov, rodovnik, veterinarska_oskrba,
                 cepljenje, kastracija_sterilizacija, telefon, email FROM oglas
                 WHERE id_oglasa={0}'''.format(id_oglasa))
-    [id_oglasa, id_uporabnika, cas_oddaje, id_pasme, opis, skotitev, cena, st_samick, st_samckov,
-     rodovnik, veterinarska_oskrba, cepljenje, kastracija_sterilizacija, telefon, email] = cur.fetchone()
+    [id_uporabnika, cas_oddaje, id_pasme, opis, skotitev, cena, st_samick,
+     st_samckov, rodovnik, veterinarska_oskrba, cepljenje, kastracija_sterilizacija,
+     telefon, email] = cur.fetchone()
 
     [leto,mesec,dan] = str(skotitev).split('-')
     skotitev = dan + '.' + mesec + '.' + leto
 
-    cur.execute("SELECT id_pasme, slovensko_ime, anglesko_ime, slike FROM pasma WHERE id_pasme={0}".format(id_pasme))
-    id_pasme, pasma, anglesko_ime, slika = cur.fetchone()
+    cur.execute('''SELECT slovensko_ime, anglesko_ime, slike FROM pasma
+                WHERE id_pasme={0}'''.format(id_pasme))
+    pasma, anglesko_ime, slika = cur.fetchone()
 
     if cena != 0:
         cena = str(cena) + ' €'
@@ -343,17 +373,16 @@ def oglas_get(id_oglasa):
         cena = 'Podarim'
 
     #regija
-    cur.execute("SELECT id_uporabnika, posta FROM uporabniki WHERE id_uporabnika={0}".format(id_uporabnika))
-    id_uporabnika, posta = cur.fetchone()
-    cur.execute("SELECT postna_st, regija FROM posta WHERE postna_st={0}".format(posta))
-    posta, regija = cur.fetchone()
-    cur.execute("SELECT id, regija FROM regija WHERE id={0}".format(regija))
-    id_regije, regija = cur.fetchone()
+    cur.execute('''SELECT regija.regija FROM uporabniki
+                    INNER JOIN posta ON uporabniki.posta=posta.postna_st
+                    INNER JOIN regija ON posta.regija=regija.id
+                    WHERE uporabniki.id_uporabnika={0}'''.format(id_uporabnika))
+    [regija] = cur.fetchone()
 
     #uporabnik
-    cur.execute('''SELECT id_uporabnika, email, stevilka FROM uporabniki
+    cur.execute('''SELECT email, stevilka FROM uporabniki
                 WHERE id_uporabnika={0}'''.format(id_uporabnika))
-    id_uporabnika, email_up, stevilka_up = cur.fetchone()
+    email_up, stevilka_up = cur.fetchone()
     if email:
         email = email_up
     if telefon:
@@ -439,6 +468,12 @@ def oglas_post(id_oglasa):
 
 @route('/ustvari_oglas/', method='GET')
 def ustvari_oglas_get():
+    username = request.get_cookie('username')
+
+    # preverimo, če je kdo prijavljen
+    if username==None:
+        return redirect('/prijava/')
+    
     cur.execute('''SELECT slovensko_ime, id_pasme FROM pasma ''')
     rows = cur.fetchall() # prebere zgornji select in ga zapiše v rows v obliki
     pasme = []
@@ -448,8 +483,6 @@ def ustvari_oglas_get():
         pasma = pasma.replace("'", "")
         pasme.append((pasma, id_pasme))
     pasme.sort()
-    
-    username = request.get_cookie('username')
         
     return template('ustvari_oglas.tpl',
                     pasme=pasme,
@@ -497,7 +530,7 @@ def ustvari_oglas_post():
                  '{0}'.format(veterinar), '{0}'.format(cepljenje), '{0}'.format(kastracija),
                  '{0}'.format(telefon), '{0}'.format(email))
     cur.execute("INSERT INTO oglas VALUES {0}".format(nov_oglas))
-    return redirect("/oglasi/")
+    return redirect("/oglasi/1")
 
 
 ################################################################################################

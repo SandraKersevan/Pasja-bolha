@@ -34,7 +34,7 @@
   
 	<body>
 		<div id="glava">
-			<b><a href="http://localhost:8080/" style="display:initial;background-color:transparent;border:0;color:black">PASJA BOLHA</a></b>
+			<b><a href="../"  style="display:initial;background-color:transparent;border:0;color:black">PASJA BOLHA</a></b>
 		</div>
 		<h1>Aktualni oglasi</h1>
 		<div id="vsebina">
@@ -57,20 +57,20 @@
 			}
 		</style>
 		
-		<form class="form-signin" role="form" method="post" action=".">
-		
 		<p style="text-align:left;">
 			<br>
 			Prijavljeni ste kot  <b><u>{{username}}</u></b> 
-			
+			<form method="get" action="/ustvari_oglas/">
 			<span style="float:right;">
-				<button href="/ustvari_oglas/" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Ustvari oglas</button>
+				<button class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Ustvari oglas</button>
 			</span>
 		</p>
 		
+		<form class="form-signin" role="form" method="post" action=".">
+		
 		<br>
 		<center>
-		%for (id_oglasa,slika,pasma,cena,regija,st_samick,st_samckov) in oglasi:
+		%for (cas,id_oglasa,slika,pasma,cena,regija,st_samick,st_samckov) in oglasi:
 			<a href="/oglas/{{id_oglasa}}" style="display:block;width:900px; height:300px" target="_blank" align="center">
 				<div id="wrap">
 					<div id="left_col">
