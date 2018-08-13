@@ -38,12 +38,13 @@
 					%end
 			</select>
 		</div>
-		
+
 		<div class="form-group">
-			<label for="inputDescription" class="form-text">Opis</label>
-			<textarea cols="107" rows="5" id="inputDescription" placeholder="Opis..." name="opis" required></textarea>
+		  <label for="inputDescription" class="form-text">Opis</label>
+		  <textarea class="form-control" rows="4" aria-label="With textarea" id="inputDescription" name="opis" placeholder="Opis..." required></textarea>
 		</div>
 
+		
 		<div class="form-row">
 			<div class="form-group col-md-1">
 				<label for="inputDate" class="form-text">Skotitev:</label>
@@ -80,6 +81,14 @@
 			</div>
 		</div>
 
+		<div class="input-group">
+		  <input type="number" class="form-control" placeholder="Vpiši ceno" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+		  <div class="input-group-append" id="button-addon4">
+			<button class="btn btn-secondary" type="button">Podarim</button>
+			<button class="btn btn-secondary" type="button">Po dogovoru</button>
+		  </div>
+		</div>
+		
 		<div class="form-row">
 			<div class="form-group col-md-1">
 				<label for="inputFemale" class="form-text">Samičke:</label>

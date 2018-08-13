@@ -328,14 +328,15 @@ def oglasi_get(stran):
     oglasi = oglasi[::-1]
 
     # stevilo strani
-    if len(oglasi)%5 == 0:
-        st_strani = len(oglasi)//5
+    st = 5
+    if len(oglasi)%st == 0:
+        st_strani = len(oglasi)//st
     else:
-        st_strani = len(oglasi)//5 + 1
+        st_strani = len(oglasi)//st + 1
 
     # vzamemo 5 oglasov
     stran = int(stran)
-    oglasi = oglasi[(stran-1)*5:stran*5]
+    oglasi = oglasi[(stran-1)*st:stran*st]
     
          
     return template('oglasi',
@@ -442,6 +443,7 @@ def oglas_get(id_oglasa):
                     email=email,
                     popravljeni_komentarji=popravljeni_komentarji,
                     id_oglasa=id_oglasa)
+
  
 @route('/oglas/<id_oglasa>', method='POST')
 def oglas_post(id_oglasa):

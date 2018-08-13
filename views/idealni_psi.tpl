@@ -38,7 +38,7 @@
 					%for (ime, ang_ime, slika) in psi:
 						<tr>
 							<td><img src="{{slika}}"></td>
-							<td><a href="https://dogtime.com/dog-breeds/{{ang_ime}}#/slide/1" style="color:grey">{{ime}}</a></td>
+							<td><a href="https://dogtime.com/dog-breeds/{{ang_ime}}#/slide/1" style="color:black">{{ime}}</a></td>
 					    </tr>
 					%end
 					</tbody>

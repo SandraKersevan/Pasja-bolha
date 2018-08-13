@@ -75,8 +75,62 @@
 			</span>	
 			</td>
 		  </tr>
+		  
+		  <tr>
+			<td height="40">
+			</td>
+			<td height="40">
+			</td>
+		  </tr>
 		</table>
 		</center>
+		
+		<center>
+		<table border="0" width="100%">
+		<colgroup>
+			<col style="width:13%">
+			<col style="width:87%">
+		</colgroup>
+		  <tr>
+			<td height="20">
+			<label for="razvrscanje" class="form-text" style="float:right;">Razvrsti oglase po: &nbsp</label> 
+			</td>
+			<td height="20">
+			<select id="razvrscanje" class="form-control" name="" style="width:250px;" onchange="javascript:location.href = this.value;">
+					<option selected value="starost_oglasa_nar">Starost oglasa naraščajoče</option>
+					<option value="starost_oglasa_pad">Starost oglasa padajoče</option>
+					<option value="https://www.yahoo.com/">Starost psa naraščajoče</option>
+					<option value="https://www.google.co.in/">Starost psa padajoče</option>
+					<option value="https://www.gmail.com/">Abecedni vrstni red (A-Ž)</option>
+					<option value="abeceda_za">Abecedni vrstni red (Ž-A)</option>
+					<option value="cena_nar">Cena naraščajoče</option>
+					<option value="cena_pad">Cena padajoče</option>
+			</select>
+			</td>
+		  </tr>
+		  
+		    <script type="text/javascript">
+				window.onload = function(){
+					location.href=document.getElementById("selectbox").value;
+				}       
+			</script>
+		  
+		  <tr>
+			<td height="20">
+			<label for="stevilo_oglasov" class="form-text" style="float:right;">Na stran pokaži: &nbsp</label>
+			</td>
+			<td height="20">
+			<select id="stevilo_oglasov" class="form-control" name="razvrscanje" style="width:130px;" / required>
+					<option selected value="5">5 oglasov</option>
+					<option value="10">10 oglasov</option>
+					<option value="vse">Vse oglase</option>
+			</select>
+			</td>
+		  </tr>
+		</table>
+		</center>
+		
+		
 		
 		<form class="form-signin" role="form" method="post" action=".">
 		
