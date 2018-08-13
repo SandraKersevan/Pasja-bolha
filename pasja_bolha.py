@@ -139,8 +139,6 @@ def idealni_psi_get():
     # preverimo izbiro
     if izbrano==None:
         return redirect('/izbira_psa/')
-        
-    vsota = sum(izbrano)
 
     primerni = []
     
@@ -164,7 +162,7 @@ def idealni_psi_get():
     rows = cur.fetchall()
     for row in rows:
         row = [int(x) for x in row]
-        razlika_pasme = abs(sum(row[1:]) - vsota)
+        razlika_pasme = sum([abs(x - y) for (x, y) in zip(row[1:],izbrano)])
         primerni.append((row[0], razlika_pasme))
     primerni.sort(key=lambda x: x[1])
     primerni = primerni[0:10] #prikaze prvih 10
