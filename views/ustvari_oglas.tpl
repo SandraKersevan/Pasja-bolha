@@ -29,7 +29,7 @@
 		
 		<h3>Informacije o psu/psih</h3>
 		
-		<div class="form-row">
+		<div class="form-group">
 			<label for="inputBreed" class="form-text">Pasma</label>
 			<select id="inputBreed" class="form-control" name="pasma" required>
 				<option selected value="300">Izberi...</option>
@@ -43,7 +43,72 @@
 		  <label for="inputDescription" class="form-text">Opis</label>
 		  <textarea class="form-control" rows="4" aria-label="With textarea" id="inputDescription" name="opis" placeholder="Opis..." required></textarea>
 		</div>
+		
+		<div class="form-group">
+				<label for="inputPassword1" class="form-text">Cena</label>
+		</div>
+       
+		<div class="form-row" id="radiocb" onclick="cbclick(event)">
+			<div class="form-group col-md-4">
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<div class="input-group-text">
+				  <input type="checkbox" id="cena_izbrano" name="cena_izbrano" checked />
+				</div>
+			  </div>
+			  <input type="number" class="form-control" min="1" id="cena" name="cena">
+			  <div class="input-group-append">
+				<span class="input-group-text">€</span>
+			  </div>
+			</div>
+			</div>
+			
+			<div class="form-group col-md-4">
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<div class="input-group-text">
+				  <input type="checkbox" id="po_dogovoru" name="po_dogovoru" />
+				</div>
+			  </div>
+			  <div class="input-group-append">
+				<span class="input-group-text" style="width:210px">Po dogovoru</span>
+			  </div>
+			</div>
+			</div>
+			
+			<div class="form-group col-md-4">
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<div class="input-group-text">
+				  <input type="checkbox" id="podarim" name="podarim" />
+				</div>
+			  </div>
+			  <div class="input-group-append">
+				<span class="input-group-text" style="width:210px">Podarim</span>
+			  </div>
+			</div>
+			</div>
+		</div>
+        
+		<div>
 
+		<script>
+		function cbclick(e){
+		   e = e || event;
+		   var cb = e.srcElement || e.target;
+		   if (cb.type !== 'checkbox') {return true;}
+		   var cbxs = document.getElementById('radiocb')
+					   .getElementsByTagName('input'), 
+			   i    = cbxs.length;
+			while(i--) {
+				if (cbxs[i].type 
+					 && cbxs[i].type == 'checkbox' 
+					 && cbxs[i].id !== cb.id) {
+				  cbxs[i].checked = false;
+				}
+			}
+		}
+		</script>
 		
 		<div class="form-row">
 			<div class="form-group col-md-1">
@@ -70,24 +135,6 @@
 			today = yyyy+'-'+mm+'-'+dd;
 			document.getElementById("inputDate").setAttribute("max", today);
 		</script>
-		
-		<div class="form-row">
-			<div class="form-group col-md-1">
-				<label for="inputPassword1" class="form-text">Cena:</label>
-			</div>
-
-			<div class="form-group col-md-11">
-				<input type="number" value="0" min='0' class="form-control" id="cena" name="cena" required>
-			</div>
-		</div>
-
-		<div class="input-group">
-		  <input type="number" class="form-control" placeholder="Vpiši ceno" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
-		  <div class="input-group-append" id="button-addon4">
-			<button class="btn btn-secondary" type="button">Podarim</button>
-			<button class="btn btn-secondary" type="button">Po dogovoru</button>
-		  </div>
-		</div>
 		
 		<div class="form-row">
 			<div class="form-group col-md-1">
@@ -174,28 +221,7 @@
 			</div>
 			</div>
 		</div>
-		
-		
-		<div class="form-row">
-			<div class="form-group col-md-2">
-				<label for="inputPicture" class="form-text">Naloži sliko.</label>
-			</div>
-
-			<div class="form-group col-md-10">
-				<input type="file" id="inputPicture" name="slike" multiple>
-			</div>
-		</div>
-		
-		<script language='javascript' type='text/javascript'> <!-- Ne dela - naj bi omejil število dodanih slik -->
-			$(function(){
-				$("input[type='submit']").click(function(){
-					var $fileUpload = $("input[type='file']");
-					if (parseInt($fileUpload.get(0).files.length)>4){
-						alert("Naložite lahko le 4 fotografije.");
-					}
-				});    
-			});​
-		</script>
+	
 		<br>
 		
 		<h3>Informacije o lastniku</h3>
@@ -236,7 +262,7 @@
 		</div>	
 		<br>
 		<div>
-			<button href="/oglasi/" class="btn btn-outline-secondary btn-lg" style="float: right;" onclick="check(this); check2(this); check3(this)" role="button" aria-pressed="true">Oddaj oglas</button>
+			<button href="/oglasi/" class="btn btn-outline-secondary btn-lg" style="float: right;" onclick="check(this); check2(this); check3(this); check4(this)" role="button" aria-pressed="true">Oddaj oglas</button>
 		</div>
 		
 		<br>
@@ -277,6 +303,19 @@
 						inputPhoneElm.setCustomValidity('');
 							}
 					}
+					
+				function check4(input) {
+					const inputPriceElm = document.getElementById('cena');
+					if (document.getElementById('cena_izbrano').checked && document.getElementById('cena').value == "") {
+						// alert("Določi ceno.");
+						inputPriceElm.setCustomValidity('Določite ceno.');
+					} else {
+						// input is valid -- reset the error message
+						inputPriceElm.setCustomValidity('');
+							}
+					}
+					
+			
 			</script>
 	</div> <!-- /container -->
 

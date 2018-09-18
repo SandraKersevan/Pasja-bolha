@@ -202,7 +202,7 @@ def prijava_post():
         print("Najdeno")
         response.set_cookie('username', username, path='/')
         response.status = 303
-        response.set_header('Location', '/oglasi/1')
+        response.set_header('Location', '/oglasi/starost_oglasa_nar/5/1')
     
     else:
         print("Ni v bazi")
@@ -290,11 +290,11 @@ def registracija_post():
                 cur.execute("INSERT INTO uporabniki VALUES {0}".format(nov_uporabnik))
                 response.set_cookie('username', username, path='/')
                 response.status = 303
-                response.set_header('Location', '/oglasi/1')
+                response.set_header('Location', '/oglasi/starost_oglasa_nar/5/1')
 
 # Stran z oglasi
-@route('/oglasi/<stran>', method='GET')
-def oglasi_get(stran):
+@route('/oglasi/<razvrstitev>/<st_oglasov>/<stran>', method='GET')
+def oglasi_get(razvrstitev, st_oglasov, stran):
     username = request.get_cookie('username')
     # preverimo, če je kdo prijavljen
     if username==None:
@@ -310,8 +310,10 @@ def oglasi_get(stran):
         cur.execute("SELECT slovensko_ime, slike FROM pasma WHERE id_pasme={0}".format(id_pasme))
         pasma, slika = cur.fetchone()
 
-        if cena != 0:
+        if cena > 0:
             cena = str(cena) + ' €'
+        elif cena == -10:
+            cena = 'Po dogovoru'
         else:
             cena = 'Podarim'
 
@@ -324,11 +326,37 @@ def oglasi_get(stran):
 
         oglasi.append((cas_oddaje,id_oglasa,slika,pasma,cena,regija,st_samick,st_samckov))        
 
-    # uredimo oglase od najnovejšega do najstarejšega
-    oglasi = oglasi[::-1]
+    # uredimo oglase
+    if razvrstitev == 'starost_oglasa_nar':
+        oglasi = oglasi[::-1]
+    elif razvrstitev == 'starost_oglasa_pad':
+        oglasi = oglasi
+    elif razvrstitev == 'starost_psa_nar':  ##TODO: razvrstitev oglasov kot je treba
+        oglasi = oglasi
+    elif razvrstitev == 'starost_psa_pad':
+        oglasi = oglasi
+    elif razvrstitev == 'abeceda_az':
+        oglasi = oglasi
+    elif razvrstitev == 'abeceda_za':
+        oglasi = oglasi
+    elif razvrstitev == 'cena_nar':
+        oglasi = oglasi
+    elif razvrstitev == 'cena_pad':
+        oglasi = oglasi
+
+    print(razvrstitev)
 
     # stevilo strani
-    st = 5
+    if st_oglasov == "5":
+        st = 5
+    elif st_oglasov == "10":
+        st = 10
+    else:
+        st = len(oglasi)
+
+    print(st)
+    
+    
     if len(oglasi)%st == 0:
         st_strani = len(oglasi)//st
     else:
@@ -343,6 +371,8 @@ def oglasi_get(stran):
                     username=username,
                     oglasi=oglasi,
                     st_strani=st_strani,
+                    razvrstitev=razvrstitev,
+                    st_oglasov=st_oglasov,
                     stran=stran)
 
 # Stran z oglasom, njegovimi podrobnostmi in komentarji
@@ -374,11 +404,12 @@ def oglas_get(id_oglasa):
         cena = 'Podarim'
 
     #regija
-    cur.execute('''SELECT regija.regija FROM uporabniki
+    cur.execute('''SELECT regija.regija_sklanjano FROM uporabniki
                     INNER JOIN posta ON uporabniki.posta=posta.postna_st
                     INNER JOIN regija ON posta.regija=regija.id
                     WHERE uporabniki.id_uporabnika={0}'''.format(id_uporabnika))
     [regija] = cur.fetchone()
+    print(regija)
 
     #uporabnik
     cur.execute('''SELECT email, stevilka FROM uporabniki
@@ -495,7 +526,6 @@ def ustvari_oglas_post():
     id_pasme = int(request.forms.pasma)
     opis = request.forms.opis
     skotitev = request.forms.skotitev
-    cena = int(request.forms.cena)
     samicke = int(request.forms.samicke)
     samcki = int(request.forms.samcki)
     rodovnik = request.forms.rodovnik
@@ -512,6 +542,18 @@ def ustvari_oglas_post():
     kastracija = boolean(kastracija)
     email = boolean(email)
     telefon = boolean(telefon)
+
+    cena_izbrano = request.forms.cena_izbrano
+    if cena_izbrano:
+        cena = int(request.forms.cena)
+
+    po_dogovoru = request.forms.po_dogovoru
+    if po_dogovoru:
+        cena = -10
+
+    podarim = request.forms.podarim
+    if podarim:
+        cena = 0
     
     # Iz baze preberemo id_uporabnika
     cur.execute("SELECT id_uporabnika FROM uporabniki WHERE uporabnisko_ime='" + uporabnik + "'")
@@ -532,7 +574,7 @@ def ustvari_oglas_post():
                  '{0}'.format(veterinar), '{0}'.format(cepljenje), '{0}'.format(kastracija),
                  '{0}'.format(telefon), '{0}'.format(email))
     cur.execute("INSERT INTO oglas VALUES {0}".format(nov_oglas))
-    return redirect("/oglasi/1")
+    return redirect("/oglasi/starost_oglasa_nar/5/1")
 
 
 ################################################################################################
