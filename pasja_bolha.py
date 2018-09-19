@@ -398,10 +398,12 @@ def oglas_get(id_oglasa):
                 WHERE id_pasme={0}'''.format(id_pasme))
     pasma, anglesko_ime, slika = cur.fetchone()
 
-    if cena != 0:
+    if cena > 0:
         cena = str(cena) + ' €'
-    else:
+    elif cena == 0:
         cena = 'Podarim'
+    else:
+        cena = 'Po dogovoru'
 
     #regija
     cur.execute('''SELECT regija.regija_sklanjano FROM uporabniki
