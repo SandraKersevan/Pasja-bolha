@@ -34,7 +34,7 @@
   
 	<body>
 		<div id="glava">
-			<b><a href="../"  style="display:initial;background-color:transparent;border:0;color:black">PASJA BOLHA</a></b>
+			<b><a href="../../../"  style="display:initial;background-color:transparent;border:0;color:black">PASJA BOLHA</a></b>
 		</div>
 		<h1>Aktualni oglasi</h1>
 		<div id="vsebina">
@@ -230,7 +230,7 @@
 		
 		<br>
 		<center>
-		%for (cas,id_oglasa,slika,pasma,cena,regija,st_samick,st_samckov) in oglasi:
+		%for (cas,id_oglasa,slika,pasma,cena,cena_str,regija,st_samick,st_samckov,skotitev) in oglasi:
 			<a href="/oglas/{{id_oglasa}}" style="display:block;width:900px; height:300px" target="_blank" align="center">
 				<div id="wrap">
 					<div id="left_col">
@@ -249,7 +249,7 @@
 						%end
 						<br>
 						<br>
-						<p>{{cena}}</p>
+						<p>{{cena_str}}</p>
 						<p>{{regija}}</p>
 						<br>
 					</div>

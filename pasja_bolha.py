@@ -301,21 +301,22 @@ def oglasi_get(razvrstitev, st_oglasov, stran):
         return redirect('/prijava/')
 
     oglasi = []
-    cur.execute('''SELECT id_oglasa, id_uporabnika, cas_oddaje, id_pasme, cena,
+    cur.execute('''SELECT id_oglasa, id_uporabnika, cas_oddaje, id_pasme, skotitev, cena,
                 st_samick, st_samckov FROM oglas''')
     rows = cur.fetchall()
     for row in rows:
-        id_oglasa, id_uporabnika, cas_oddaje, id_pasme, cena, st_samick, st_samckov = row
+        id_oglasa, id_uporabnika, cas_oddaje, id_pasme, skotitev, cena, st_samick, st_samckov = row
         
         cur.execute("SELECT slovensko_ime, slike FROM pasma WHERE id_pasme={0}".format(id_pasme))
         pasma, slika = cur.fetchone()
 
+        cena_str = ''
         if cena > 0:
-            cena = str(cena) + ' €'
+            cena_str = str(cena) + ' €'
         elif cena == -10:
-            cena = 'Po dogovoru'
+            cena_str = 'Po dogovoru'
         else:
-            cena = 'Podarim'
+            cena_str = 'Podarim'
 
         #regija
         cur.execute('''SELECT regija.regija FROM uporabniki
@@ -324,27 +325,68 @@ def oglasi_get(razvrstitev, st_oglasov, stran):
                     WHERE uporabniki.id_uporabnika={0}'''.format(id_uporabnika))
         [regija] = cur.fetchone()
 
-        oglasi.append((cas_oddaje,id_oglasa,slika,pasma,cena,regija,st_samick,st_samckov))        
+        oglasi.append((cas_oddaje,id_oglasa,slika,pasma,cena,cena_str,regija,st_samick,st_samckov, skotitev))        
 
+    # razvrscanje: abeceda
+    oglasi_sez_abeceda = []
+    for tupl in oglasi:
+        podatki = list(tupl)
+        podatki[0], podatki[3] = podatki[3], podatki[0]
+        oglasi_sez_abeceda.append(podatki)
+    oglasi_sez_abeceda = sorted(oglasi_sez_abeceda)
+        
+    oglasi_abeceda_az = []
+    for sez in oglasi_sez_abeceda:
+        sez[0], sez[3] = sez[3], sez[0]
+        podatki = tuple(sez)
+        oglasi_abeceda_az.append(podatki)
+
+    # razvrscanje: cena
+    oglasi_sez_cena = []
+    for tupl in oglasi:
+        podatki = list(tupl)
+        podatki[0], podatki[4] = podatki[4], podatki[0]
+        oglasi_sez_cena.append(podatki)
+    oglasi_sez_cena = sorted(oglasi_sez_cena)
+        
+    oglasi_cena_nar = []
+    for sez in oglasi_sez_cena:
+        sez[0], sez[4] = sez[4], sez[0]
+        podatki = tuple(sez)
+        oglasi_cena_nar.append(podatki)
+        
+    # razvrscanje: starost psa
+    oglasi_sez_pes = []
+    for tupl in oglasi:
+        podatki = list(tupl)
+        podatki[0], podatki[9] = podatki[9], podatki[0]
+        oglasi_sez_pes.append(podatki)
+    oglasi_sez_pes = sorted(oglasi_sez_pes)
+        
+    oglasi_pes_nar = []
+    for sez in oglasi_sez_pes:
+        sez[0], sez[9] = sez[9], sez[0]
+        podatki = tuple(sez)
+        oglasi_pes_nar.append(podatki)
+        
     # uredimo oglase
     if razvrstitev == 'starost_oglasa_nar':
         oglasi = oglasi[::-1]
     elif razvrstitev == 'starost_oglasa_pad':
         oglasi = oglasi
-    elif razvrstitev == 'starost_psa_nar':  ##TODO: razvrstitev oglasov kot je treba
-        oglasi = oglasi
+    elif razvrstitev == 'starost_psa_nar':
+        oglasi = oglasi_pes_nar
     elif razvrstitev == 'starost_psa_pad':
-        oglasi = oglasi
+        oglasi = oglasi_pes_nar[::-1]
     elif razvrstitev == 'abeceda_az':
-        oglasi = oglasi
+        oglasi = oglasi_abeceda_az
     elif razvrstitev == 'abeceda_za':
-        oglasi = oglasi
+        oglasi = oglasi_abeceda_az[::-1]
     elif razvrstitev == 'cena_nar':
-        oglasi = oglasi
+        oglasi = oglasi_cena_nar
     elif razvrstitev == 'cena_pad':
-        oglasi = oglasi
+        oglasi = oglasi_cena_nar[::-1]
 
-    print(razvrstitev)
 
     # stevilo strani
     if st_oglasov == "5":
@@ -354,15 +396,11 @@ def oglasi_get(razvrstitev, st_oglasov, stran):
     else:
         st = len(oglasi)
 
-    print(st)
-    
-    
     if len(oglasi)%st == 0:
         st_strani = len(oglasi)//st
     else:
         st_strani = len(oglasi)//st + 1
 
-    # vzamemo 5 oglasov
     stran = int(stran)
     oglasi = oglasi[(stran-1)*st:stran*st]
     
