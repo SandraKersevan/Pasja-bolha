@@ -123,7 +123,6 @@ def izbira_psa_post():
                stevilka(inteligenca), stevilka(grizenje), stevilka(lovski_nagon),
                stevilka(lajanje), stevilka(potepanje), stevilka(energicnost),
                stevilka(utrujenost), stevilka(gibanje), stevilka(igrivost)]
-    print(izbrano)
 
     while True:
         response.set_cookie('izbrano', izbrano, path='/', secret=secret)
@@ -181,8 +180,6 @@ def idealni_psi_get():
 @route('/idealni_psi/', method='POST')
 def idealni_psi_post():
     response.delete_cookie('izbrano')
-    print("Cookie izbrano pobrisan, samo ni zares")
-    # OPOMBA: Tu je nek bug, ker ne pobriše cookija, ko gre nazaj
     return redirect("/izbira_psa/")
 
 
@@ -199,13 +196,13 @@ def prijava_post():
 
     cur.execute("SELECT uporabnisko_ime, geslo FROM uporabniki WHERE uporabnisko_ime='" + username + "' AND geslo='" + password + "'")
     if cur.fetchone():
-        print("Najdeno")
+        print("Uspesna prijava")
         response.set_cookie('username', username, path='/')
         response.status = 303
         response.set_header('Location', '/oglasi/starost_oglasa_nar/5/1')
     
     else:
-        print("Ni v bazi")
+        print("Uporabnika ni v bazi")
         return redirect("/napaka/")
 
 
@@ -247,19 +244,6 @@ def registracija_post():
     geslo = request.forms.geslo1
     geslo2 = request.forms.geslo2
 
-    # Dolocimo kraj (za postno stevilko)
-    ## OPOMBA: ali je res potrebno iskati kraj, saj je v bazi tabela povezana s tabelo poste (+ lahko jo preberemo direktno iz strani,
-    ##         saj imamo obliko postna_st+kraj v spustnem seznamu)
-    kraj = ""
-    cur.execute('''SELECT posta FROM posta ''')
-    rows = cur.fetchall() # prebere zgornji select in ga zapiše v rows v obliki (postna_st, posta, regija)
-    for row in rows:
-        (postna_st, posta, regija) = tuple(row[0].split(','))
-        posta = re.sub('"', '', posta)
-        postna_st = int(postna_st[1:])
-        if postna_stevilka == postna_st:
-            kraj = posta
-
     if uporabnik != None:
         # Ali je email že v bazi?
         cur.execute("SELECT email FROM uporabniki WHERE email='" + email + "'")
@@ -275,10 +259,6 @@ def registracija_post():
                 # Uporabnik že obstaja
                 print('Uporabnik že obstaja')
                 return redirect("/napaka_ime/")
-            elif not geslo==geslo2:
-                # Gesli se ne ujemata
-                ## OPOMBA: ali je res potrebno, saj nas stran (naj) ne bi spustila cez, če se gesli ne ujemata (JavaScript koda v css)
-                print('Gesli se ne ujemata.')
             else:
                 # Vse je v redu, vstavi novega uporabnika v bazo
                 cur.execute("SELECT COUNT(*) FROM uporabniki")
@@ -288,9 +268,10 @@ def registracija_post():
                                  '{0}'.format(naslov), '{0}'.format(postna_stevilka),
                                  '{0}'.format(email), '{0}'.format(telefon), '{0}'.format(uporabnik), '{0}'.format(geslo))
                 cur.execute("INSERT INTO uporabniki VALUES {0}".format(nov_uporabnik))
-                response.set_cookie('username', username, path='/')
+                response.set_cookie('username', uporabnik, path='/')
                 response.status = 303
                 response.set_header('Location', '/oglasi/starost_oglasa_nar/5/1')
+                print("Uspesna registracija")
 
 # Stran z oglasi
 @route('/oglasi/<razvrstitev>/<st_oglasov>/<stran>', method='GET')
@@ -449,7 +430,6 @@ def oglas_get(id_oglasa):
                     INNER JOIN regija ON posta.regija=regija.id
                     WHERE uporabniki.id_uporabnika={0}'''.format(id_uporabnika))
     [regija] = cur.fetchone()
-    print(regija)
 
     #uporabnik
     cur.execute('''SELECT email, stevilka FROM uporabniki
@@ -601,7 +581,6 @@ def ustvari_oglas_post():
     id_uporabnika = int(id_uporabnika)
 
     # Pogledamo za id_oglasa
-    # OPOMBA:  Vedno gledamo število oglasov, kaj če kakšnega vmes izbrišemo iz baze? (potem imata dva isti id)
     cur.execute("SELECT COUNT(*) FROM oglas")
     [[stevilo_oglasov]] = cur.fetchall()
     id_oglasa = int(stevilo_oglasov)+1
@@ -614,6 +593,7 @@ def ustvari_oglas_post():
                  '{0}'.format(veterinar), '{0}'.format(cepljenje), '{0}'.format(kastracija),
                  '{0}'.format(telefon), '{0}'.format(email))
     cur.execute("INSERT INTO oglas VALUES {0}".format(nov_oglas))
+    print("Nov oglas")
     return redirect("/oglasi/starost_oglasa_nar/5/1")
 
 
