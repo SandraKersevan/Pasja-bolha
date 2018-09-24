@@ -43,8 +43,9 @@
 					%end
 					</tbody>
 				</table>
-				<br>	
+				<br>
 				
+				<p>Vse pasme in njihove lastnosti pa si lahko ogledate <a href="http://localhost:8080/vse_pasme/" style="color:black">tukaj</a>.</p>
 				<p align="right">
 				<button href="/izbira_psa/" type="submit" class="btn btn-outline-dark btn-lg">Nazaj</button>
 				</p>

@@ -1,0 +1,67 @@
+body {
+    margin: 0px;
+    font-family: arial;
+	font-size: 10px;
+}
+
+h1 {
+    margin: 2px 0px 1em 0px;
+    background-color: rgb(250, 225, 209);
+    color: Black;
+    padding-left: 20px;
+	font-size: 50%;
+    text-align: center;
+}
+
+div#vsebina {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+div#glava {
+    background-color: rgb(243, 181, 140);
+    color: Black;
+    padding-left: 20px;
+    font-size: 300%;
+    text-align: center;
+}
+
+div#noga {
+    background-color: Gray;
+    padding-right: 20px;
+    text-align: right;
+    font-size: 80%;
+}
+
+div#sporocilo {
+    font-weight: bold;
+    background-color: yellow;
+    border: 1px solid red;
+    padding: 5px;
+}
+
+.verticalTableHeader {
+    text-align:initial;
+    transform-origin:50% 50%;
+    transform: rotate(-90deg);
+	padding-left: 0px;
+	margin-left: 0px;
+	max-width: 13px;
+}
+.verticalTableHeader:before {
+    content:'';
+    padding-top:110%;/* takes width as reference, + 10% for faking some extra padding */
+    display:inline-flex;
+    vertical-align:middle;
+}
+
+th {
+   text-align: left;
+   white-space:nowrap;
+}
+
+td {
+   width: 3%;
+   text-align: center;
+   white-space:nowrap;
+}

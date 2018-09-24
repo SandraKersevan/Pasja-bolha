@@ -242,7 +242,10 @@
 						<h3>{{pasma}}</h3>
 						<br>
 						%if st_samick != 0:
-							<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png"> &nbsp;&nbsp; 
+							<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="http://www.clker.com/cliparts/E/8/n/2/2/W/pink-paw-print-md.png"> 
+						%end
+						%if st_samick != 0 and st_samckov != 0:
+							&nbsp;&nbsp;
 						%end
 						%if st_samckov != 0:
 							<img style="height:40px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="https://rlv.zcache.com/light_baby_blue_paw_print_pawprint_ceramic_knob-r8fe035ad557949d3b7ee08d9e8ca2e64_zp2d5_307.jpg?rlvnet=1&rvtype=content">

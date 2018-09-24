@@ -26,6 +26,7 @@ print ("Connected!\n")
 secret = "to skrivnost je zelo tezko uganiti 1094107c907cw982982c42"
 
 ######################################################################
+
 # Pomozne funkcije:
 
 def stevilka(besedilo):
@@ -182,6 +183,20 @@ def idealni_psi_post():
     response.delete_cookie('izbrano')
     return redirect("/izbira_psa/")
 
+
+@route('/vse_pasme/', method='GET')
+def vse_pasme_get():
+    cur.execute('''SELECT slovensko_ime, anglesko_ime, primernost_za_stanovanja, primernost_za_zacetnike,
+                     obcutljivost, prenese_samoto, primernost_za_hladno_podnebje,
+                     primernost_za_toplo_podnebje, primernost_za_druzine, prijaznost_do_otrok,
+                     prijaznost_do_drugih_psov, prijaznost_do_tujcev, izpadanje_dlake, slinjenje,
+                     nezahtevnost_dlake, splosno_zdravje, potencial_za_debelost, velikost,
+                     ucljivost, inteligenca, grizenje, lovski_pes, lajanje, potepanje, potreba_po_gibanju,
+                     energicnost, intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza,
+                     max_teza, min_zivljenska_doba, max_zivljenska_doba FROM pasma''')
+    vse_pasme = cur.fetchall()                    
+    return template('vse_pasme',
+                    vse_pasme = vse_pasme)
 
 # Stran za prijavo in registracijo
 @route('/prijava/', method='GET')
