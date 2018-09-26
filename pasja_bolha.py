@@ -198,6 +198,64 @@ def vse_pasme_get():
     return template('vse_pasme',
                     vse_pasme = vse_pasme)
 
+@route('/pasma/', method='GET')
+def vse_pasme_get():
+    cur.execute('''SELECT slovensko_ime, anglesko_ime, primernost_za_stanovanja, primernost_za_zacetnike,
+                     obcutljivost, prenese_samoto, primernost_za_hladno_podnebje,
+                     primernost_za_toplo_podnebje, primernost_za_druzine, prijaznost_do_otrok,
+                     prijaznost_do_drugih_psov, prijaznost_do_tujcev, izpadanje_dlake, slinjenje,
+                     nezahtevnost_dlake, splosno_zdravje, potencial_za_debelost, velikost,
+                     ucljivost, inteligenca, grizenje, lovski_pes, lajanje, potepanje, potreba_po_gibanju,
+                     energicnost, intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza,
+                     max_teza, min_zivljenska_doba, max_zivljenska_doba, slike FROM pasma WHERE id_pasme = 1''')
+    [pasma] = cur.fetchall()
+    [slo_ime, ang_ime, stanovanje, zacetnik, obcutljivost, samota, hladno, toplo, druzine, otroci, psi, tujci, izp_dlake, slina,
+    nez_dlake, zdravje, debelost, velikost, ucljivost, inteligenca, grizenje, lovec, lajanje, potepanje, gibanje, energicnost,
+    intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza, max_teza, min_leta,max_leta,slika] = pasma
+    
+    min_visina, max_visina = int(min_visina), int(max_visina)
+    min_teza, max_teza = int(min_teza), int(max_teza)
+    min_leta, max_leta = int(min_leta), int(max_leta)
+
+    print(min_visina, max_visina, min_teza, max_teza, min_leta,max_leta)
+    return template('pasma',
+                    slo_ime=slo_ime,
+                    ang_ime=ang_ime,
+                    stanovanje=stanovanje,
+                    zacetnik=zacetnik,
+                    obcutljivost=obcutljivost,
+                    samota=samota,
+                    hladno=hladno,
+                    toplo=toplo,
+                    druzine=druzine,
+                    otroci=otroci,
+                    psi=psi,
+                    tujci=tujci,
+                    izp_dlake=izp_dlake,
+                    slina=slina,
+                    nez_dlake=nez_dlake,
+                    zdravje=zdravje,
+                    debelost=debelost,
+                    velikost=velikost,
+                    ucljivost=ucljivost,
+                    inteligenca=inteligenca,
+                    grizenje=grizenje,
+                    lovec=lovec,
+                    lajanje=lajanje,
+                    potepanje=potepanje,
+                    gibanje=gibanje,
+                    energicnost=energicnost,
+                    intenzivnost=intenzivnost,
+                    igrivost=igrivost,
+                    druzina=druzina,
+                    min_visina=min_visina,
+                    max_visina=max_visina,
+                    min_teza=min_teza,
+                    max_teza=max_teza,
+                    min_leta=min_leta,
+                    max_leta=max_leta,
+                    slika=slika)
+
 # Stran za prijavo in registracijo
 @route('/prijava/', method='GET')
 def prijava_get():     
