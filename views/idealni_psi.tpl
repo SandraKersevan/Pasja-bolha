@@ -35,10 +35,10 @@
 					</colgroup>
 					
 					<tbody>
-					%for (ime, ang_ime, slika) in psi:
+					%for (id_psa, ime, slika) in psi:
 						<tr>
 							<td><img src="{{slika}}"></td>
-							<td><a href="https://dogtime.com/dog-breeds/{{ang_ime}}#/slide/1" style="color:black">{{ime}}</a></td>
+							<td><a href="http://localhost:8080/pasma/{{id_psa}}" style="color:black">{{ime}}</a></td>
 					    </tr>
 					%end
 					</tbody>

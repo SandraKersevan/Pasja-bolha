@@ -60,158 +60,209 @@
 		</colgroup>
 		  <tr>
 			<td height="60"> Primeren za bivanje v stanovanju </td>
-			<td height="60" margin-left: 10px> 
+			<td height="60" margin-left: 10px>
+			%for i in range(0,stanovanje):
 				<img src="/static/pasjataca.png">
-				<img src="/static/pasjataca.png"> {{stanovanje}}
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Primeren za začetnike</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{zacetnik}}
+			%for i in range(0,zacetnik):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Občutljivost pasme</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{obcutljivost}}
+			%for i in range(0,obcutljivost):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Prenese samoto</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{samota}}
+			%for i in range(0,samota):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60"> Primeren za hladno podnebje </td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{hladno}}
+			%for i in range(0,hladno):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Primeren za toplo podnebje</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{toplo}}
+			%for i in range(0,toplo):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Primeren za druzine</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{druzine}}
+			%for i in range(0,druzine):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Prijazen do otrok</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{otroci}}
+			%for i in range(0,otroci):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Prijazen do drugih psov</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{psi}}
+			%for i in range(0,psi):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Prijazen do tujcev</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{tujci}}
+			%for i in range(0,tujci):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Izpadanje dlake</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{izp_dlake}}
+			%for i in range(0,izp_dlake):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60"> Slinjenje </td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{slina}}
+			%for i in range(0,slina):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Nezahtevnost dlake</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{nez_dlake}}
+			%for i in range(0,nez_dlake):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Splošno zdravje</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{zdravje}}
+			%for i in range(0,zdravje):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Nagnjenost k debelosti</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{debelost}}
+			%for i in range(0,debelost):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Velikost pasme</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{velikost}}
+			%for i in range(0,velikost):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Učljivost pasme</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{ucljivost}}
+			%for i in range(0,ucljivost):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Inteligenca pasme</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{inteligenca}}
+			%for i in range(0,inteligenca):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr><tr>
 			<td height="60">Nagnjenost k grizenju</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{grizenje}}
+			%for i in range(0,grizenje):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Lovski nagon pasme</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{lovec}}
+			%for i in range(0,lovec):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Nagnjenost k lajanju</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{lajanje}}
+			%for i in range(0,lajanje):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Nagnjenost pasme k potepanju</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{potepanje}}
+			%for i in range(0,potepanje):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Potreba po gibanju</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{gibanje}}
+			%for i in range(0,gibanje):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Energičnost pasme</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{energicnost}}
+			%for i in range(0,energicnost):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Inteziteta pasme</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{intenzivnost}}
+			%for i in range(0,intenzivnost):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		  <tr>
 			<td height="60">Igrivost pasme</td>
 			<td height="60" margin-left: 10px> 
-				<img src="/static/pasjataca.png"> {{igrivost}}
+			%for i in range(0,igrivost):
+				<img src="/static/pasjataca.png">
+			%end
 			</td>
 		  </tr>
 		</table>

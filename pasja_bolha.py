@@ -170,10 +170,10 @@ def idealni_psi_get():
     psi = []
     for pes in primerni:
         (id_psa, razlika) = pes
-        cur.execute('''SELECT slovensko_ime, anglesko_ime, slike FROM pasma
+        cur.execute('''SELECT id_pasme, slovensko_ime, slike FROM pasma
                     WHERE id_pasme={0}'''.format(id_psa))
-        ime, ang_ime, slika = cur.fetchone()
-        psi.append((ime, ang_ime, slika))
+        id_psa, ime, slika = cur.fetchone()
+        psi.append((id_psa, ime, slika))
     return template('idealni_psi',
                     izbrano=izbrano,
                     psi=psi)
@@ -198,8 +198,8 @@ def vse_pasme_get():
     return template('vse_pasme',
                     vse_pasme = vse_pasme)
 
-@route('/pasma/', method='GET')
-def vse_pasme_get():
+@route('/pasma/<id_psa>', method='GET')
+def vse_pasme_get(id_psa):
     cur.execute('''SELECT slovensko_ime, anglesko_ime, primernost_za_stanovanja, primernost_za_zacetnike,
                      obcutljivost, prenese_samoto, primernost_za_hladno_podnebje,
                      primernost_za_toplo_podnebje, primernost_za_druzine, prijaznost_do_otrok,
@@ -207,8 +207,9 @@ def vse_pasme_get():
                      nezahtevnost_dlake, splosno_zdravje, potencial_za_debelost, velikost,
                      ucljivost, inteligenca, grizenje, lovski_pes, lajanje, potepanje, potreba_po_gibanju,
                      energicnost, intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza,
-                     max_teza, min_zivljenska_doba, max_zivljenska_doba, slike FROM pasma WHERE id_pasme = 1''')
+                     max_teza, min_zivljenska_doba, max_zivljenska_doba, slike FROM pasma WHERE id_pasme = {0}'''.format(id_psa))
     [pasma] = cur.fetchall()
+
     [slo_ime, ang_ime, stanovanje, zacetnik, obcutljivost, samota, hladno, toplo, druzine, otroci, psi, tujci, izp_dlake, slina,
     nez_dlake, zdravje, debelost, velikost, ucljivost, inteligenca, grizenje, lovec, lajanje, potepanje, gibanje, energicnost,
     intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza, max_teza, min_leta,max_leta,slika] = pasma
@@ -216,8 +217,8 @@ def vse_pasme_get():
     min_visina, max_visina = int(min_visina), int(max_visina)
     min_teza, max_teza = int(min_teza), int(max_teza)
     min_leta, max_leta = int(min_leta), int(max_leta)
-
-    print(min_visina, max_visina, min_teza, max_teza, min_leta,max_leta)
+    druzina = druzina.lower()
+    
     return template('pasma',
                     slo_ime=slo_ime,
                     ang_ime=ang_ime,
@@ -486,9 +487,9 @@ def oglas_get(id_oglasa):
     [leto,mesec,dan] = str(skotitev).split('-')
     skotitev = dan + '.' + mesec + '.' + leto
 
-    cur.execute('''SELECT slovensko_ime, anglesko_ime, slike FROM pasma
+    cur.execute('''SELECT id_pasme, slovensko_ime, anglesko_ime, slike FROM pasma
                 WHERE id_pasme={0}'''.format(id_pasme))
-    pasma, anglesko_ime, slika = cur.fetchone()
+    id_psa, pasma, anglesko_ime, slika = cur.fetchone()
 
     if cena > 0:
         cena = str(cena) + ' €'
@@ -550,6 +551,7 @@ def oglas_get(id_oglasa):
         popravljeni_komentarji.append([uporabnisko_ime, vsebina, cas_oddaje2])
         
     return template('oglas',
+                    id_psa=id_psa,
                     pasma=pasma,
                     anglesko_ime=anglesko_ime,
                     slika=slika,
