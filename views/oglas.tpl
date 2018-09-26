@@ -16,7 +16,7 @@
 		<div id="glava">
 			<b><a href="../" style="color:black">PASJA BOLHA</a></b>
 		</div>
-		<h1><a href="../pasma/{{id_psa}}">{{pasma}}</a></h1>
+		<h1><a href="../pasma/{{id_psa}}" style="color:black">{{pasma}}</a></h1>
 		<div id="vsebina">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
