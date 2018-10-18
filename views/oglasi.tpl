@@ -98,91 +98,91 @@
 			<td height="20">
 			%if razvrstitev == "starost_oglasa_nar":
 			<select id="razvrscanje" class="form-control" name="" style="width:250px;" onchange="javascript:location.href = this.value;">
-					<option selected value="http://localhost:8080/oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
-					<option value="http://localhost:8080/oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
-					<option value="http://localhost:8080/oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
-					<option value="http://localhost:8080/oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
+					<option selected value="../../../oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
+					<option value="../../../oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
+					<option value="../../../oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
+					<option value="../../../oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
+					<option value="../../../oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
+					<option value="../../../oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
+					<option value="../../../oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
+					<option value="../../../oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
 			</select>
 			% elif razvrstitev == "starost_oglasa_pad":
 			<select id="razvrscanje" class="form-control" name="" style="width:250px;" onchange="javascript:location.href = this.value;">
-					<option value="http://localhost:8080/oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
-					<option selected value="http://localhost:8080/oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
-					<option value="http://localhost:8080/oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
-					<option value="http://localhost:8080/oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
-					<option value="http://localhost:8080/oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
+					<option value="../../../oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
+					<option selected value="../../../oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
+					<option value="../../../oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
+					<option value="../../../oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
+					<option value="../../../oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
+					<option value="../../../oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
+					<option value="../../../oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
+					<option value="../../../oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
 			</select>
 			% elif razvrstitev == "starost_psa_nar":
 			<select id="razvrscanje" class="form-control" name="" style="width:250px;" onchange="javascript:location.href = this.value;">
-					<option value="http://localhost:8080/oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
-					<option selected value="http://localhost:8080/oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
-					<option value="http://localhost:8080/oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
-					<option value="http://localhost:8080/oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
-					<option value="http://localhost:8080/oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
+					<option value="../../../oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
+					<option value="../../../oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
+					<option selected value="../../../oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
+					<option value="../../../oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
+					<option value="../../../oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
+					<option value="../../../oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
+					<option value="../../../oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
+					<option value="../../../oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
 			</select>
 			% elif razvrstitev == "starost_psa_pad":
 			<select id="razvrscanje" class="form-control" name="" style="width:250px;" onchange="javascript:location.href = this.value;">
-					<option value="http://localhost:8080/oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
-					<option selected value="http://localhost:8080/oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
-					<option value="http://localhost:8080/oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
-					<option value="http://localhost:8080/oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
-					<option value="http://localhost:8080/oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
+					<option value="../../../oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
+					<option value="../../../oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
+					<option value="../../../oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
+					<option selected value="../../../oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
+					<option value="../../../oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
+					<option value="../../../oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
+					<option value="../../../oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
+					<option value="../../../oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
 			</select>
 			% elif razvrstitev == "abeceda_az":
 			<select id="razvrscanje" class="form-control" name="" style="width:250px;" onchange="javascript:location.href = this.value;">
-					<option value="http://localhost:8080/oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
-					<option selected value="http://localhost:8080/oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
-					<option value="http://localhost:8080/oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
-					<option value="http://localhost:8080/oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
+					<option value="../../../oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
+					<option value="../../../oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
+					<option value="../../../oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
+					<option value="../../../oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
+					<option selected value="../../../oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
+					<option value="../../../oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
+					<option value="../../../oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
+					<option value="../../../oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
 			</select>
 			% elif razvrstitev == "abeceda_za":
 			<select id="razvrscanje" class="form-control" name="" style="width:250px;" onchange="javascript:location.href = this.value;">
-					<option value="http://localhost:8080/oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
-					<option value="http://localhost:8080/oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
-					<option selected value="http://localhost:8080/oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
-					<option value="http://localhost:8080/oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
+					<option value="../../../oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
+					<option value="../../../oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
+					<option value="../../../oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
+					<option value="../../../oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
+					<option value="../../../oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
+					<option selected value="../../../oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
+					<option value="../../../oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
+					<option value="../../../oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
 			</select>
 			% elif razvrstitev == "cena_nar":
 			<select id="razvrscanje" class="form-control" name="" style="width:250px;" onchange="javascript:location.href = this.value;">
-					<option value="http://localhost:8080/oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
-					<option value="http://localhost:8080/oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
-					<option value="http://localhost:8080/oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
-					<option selected value="http://localhost:8080/oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
+					<option value="../../../oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
+					<option value="../../../oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
+					<option value="../../../oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
+					<option value="../../../oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
+					<option value="../../../oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
+					<option value="../../../oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
+					<option selected value="../../../oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
+					<option value="../../../oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
 			</select>
 			% elif razvrstitev == "cena_pad":
 			<select id="razvrscanje" class="form-control" name="" style="width:250px;" onchange="javascript:location.href = this.value;">
-					<option value="http://localhost:8080/oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
-					<option value="http://localhost:8080/oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
-					<option value="http://localhost:8080/oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
-					<option value="http://localhost:8080/oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
-					<option value="http://localhost:8080/oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
-					<option selected value="http://localhost:8080/oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
+					<option value="../../../oglasi/starost_oglasa_nar/{{st_oglasov}}/1">Starost oglasa naraščajoče</option>
+					<option value="../../../oglasi/starost_oglasa_pad/{{st_oglasov}}/1">Starost oglasa padajoče</option>
+					<option value="../../../oglasi/starost_psa_nar/{{st_oglasov}}/1">Starost psa naraščajoče</option>
+					<option value="../../../oglasi/starost_psa_pad/{{st_oglasov}}/1">Starost psa padajoče</option>
+					<option value="../../../oglasi/abeceda_az/{{st_oglasov}}/1">Abecedni vrstni red (A-Ž)</option>
+					<option value="../../../oglasi/abeceda_za/{{st_oglasov}}/1">Abecedni vrstni red (Ž-A)</option>
+					<option value="../../../oglasi/cena_nar/{{st_oglasov}}/1">Cena naraščajoče</option>
+					<option selected value="../../../oglasi/cena_pad/{{st_oglasov}}/1">Cena padajoče</option>
 			</select>
 			%end
 			</td>
@@ -202,21 +202,21 @@
 			<td height="20">
 			% if st_oglasov == "5":
 			<select id="stevilo_oglasov" class="form-control" name="razvrscanje" style="width:130px;" onchange="javascript:location.href = this.value;">
-					<option selected value="http://localhost:8080/oglasi/{{razvrstitev}}/5/1">5 oglasov</option>
-					<option value="http://localhost:8080/oglasi/{{razvrstitev}}/10/1">10 oglasov</option>
-					<option value="http://localhost:8080/oglasi/{{razvrstitev}}/vsi/1">Vse oglase</option>
+					<option selected value="../../../oglasi/{{razvrstitev}}/5/1">5 oglasov</option>
+					<option value="../../../oglasi/{{razvrstitev}}/10/1">10 oglasov</option>
+					<option value="../../../oglasi/{{razvrstitev}}/vsi/1">Vse oglase</option>
 			</select>
 			% elif st_oglasov == "10":
 			<select id="stevilo_oglasov" class="form-control" name="razvrscanje" style="width:130px;" onchange="javascript:location.href = this.value;">
-					<option value="http://localhost:8080/oglasi/{{razvrstitev}}/5/1">5 oglasov</option>
-					<option selected value="http://localhost:8080/oglasi/{{razvrstitev}}/10/1">10 oglasov</option>
-					<option value="http://localhost:8080/oglasi/{{razvrstitev}}/vsi/1">Vse oglase</option>
+					<option value="../../../oglasi/{{razvrstitev}}/5/1">5 oglasov</option>
+					<option selected value="../../../oglasi/{{razvrstitev}}/10/1">10 oglasov</option>
+					<option value="../../../oglasi/{{razvrstitev}}/vsi/1">Vse oglase</option>
 			</select>
 			% else:
 			<select id="stevilo_oglasov" class="form-control" name="razvrscanje" style="width:130px;" onchange="javascript:location.href = this.value;">
-					<option value="http://localhost:8080/oglasi/{{razvrstitev}}/5/1">5 oglasov</option>
-					<option value="http://localhost:8080/oglasi/{{razvrstitev}}/10/1">10 oglasov</option>
-					<option selected value="http://localhost:8080/oglasi/{{razvrstitev}}/vsi/1">Vse oglase</option>
+					<option value="../../../oglasi/{{razvrstitev}}/5/1">5 oglasov</option>
+					<option value="../../../oglasi/{{razvrstitev}}/10/1">10 oglasov</option>
+					<option selected value="../../../oglasi/{{razvrstitev}}/vsi/1">Vse oglase</option>
 			</select>
 			% end
 			</td>
@@ -231,7 +231,7 @@
 		<br>
 		<center>
 		%for (cas,id_oglasa,slika,pasma,cena,cena_str,regija,st_samick,st_samckov,skotitev) in oglasi:
-			<a href="/oglas/{{id_oglasa}}" style="display:block;width:900px; height:300px" target="_blank" align="center">
+			<a href="../../../oglas/{{id_oglasa}}" style="display:block;width:900px; height:300px" target="_blank" align="center">
 				<div id="wrap">
 					<div id="left_col">
 						<img style="height:280px;max-width:400px;width: expression(this.width > 400 ? 400: true);" src="{{slika}}">

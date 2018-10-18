@@ -94,15 +94,28 @@
 		%end
 		<br>
 		<form method="post" action="/oglas/{{id_oglasa}}">
-		<input type="comment" class="form-control" id="comment" placeholder="Napiši komantar..." name="comment">
+		<input type="comment" class="form-control" id="comment" placeholder="Napiši komentar..." name="comment">
 		<span style="float:right;">
-				<button class="btn btn-outline-secondary btn-sm" type="submit" role="button" aria-pressed="true">Oddaj komentar</button>
+				<button class="btn btn-outline-secondary btn-sm" type="submit" role="button" aria-pressed="true" onclick="check(this)">Oddaj komentar</button>
 		</span>
 		</form>
 		<br>
 		<br>
 		</div>
 	</tbody>
+    
+            <script language='javascript' type='text/javascript'>
+				function check(input) {
+					const com = document.getElementById('comment');
+					if (com.value == "")  {
+						com.setCustomValidity('Napiši komentar.');
+					} else {
+						// input is valid -- reset the error message
+						com.setCustomValidity('');
+					}
+				}
+							
+			</script>
 	      
 	
 

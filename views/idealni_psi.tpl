@@ -38,14 +38,14 @@
 					%for (id_psa, ime, slika) in psi:
 						<tr>
 							<td><img src="{{slika}}"></td>
-							<td><a href="http://localhost:8080/pasma/{{id_psa}}" style="color:black">{{ime}}</a></td>
+							<td><a href="../pasma/{{id_psa}}" style="color:black">{{ime}}</a></td>
 					    </tr>
 					%end
 					</tbody>
 				</table>
 				<br>
 				
-				<p>Vse pasme in njihove lastnosti pa si lahko ogledate <a href="http://localhost:8080/vse_pasme/" style="color:black">tukaj</a>.</p>
+				<p>Vse pasme in njihove lastnosti pa si lahko ogledate <a href="../vse_pasme/" style="color:black">tukaj</a>.</p>
 				<p align="right">
 				<button href="/izbira_psa/" type="submit" class="btn btn-outline-dark btn-lg">Nazaj</button>
 				</p>
