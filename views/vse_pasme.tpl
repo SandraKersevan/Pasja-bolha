@@ -60,7 +60,7 @@
 				<th  onclick="sortTable(32)">Minimalna življenska doba</th>
 				<th onclick="sortTable(33)">Maksimalna življenska doba</th>
 			</tr>
-			%for [slovensko_ime, anglesko_ime, primernost_za_stanovanja, primernost_za_zacetnike,
+			%for [id_psa, slovensko_ime, anglesko_ime, primernost_za_stanovanja, primernost_za_zacetnike,
             % obcutljivost, prenese_samoto, primernost_za_hladno_podnebje,
             % primernost_za_toplo_podnebje, primernost_za_druzine, prijaznost_do_otrok,
             % prijaznost_do_drugih_psov, prijaznost_do_tujcev, izpadanje_dlake, slinjenje,
@@ -69,7 +69,7 @@
             % energicnost, intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza,
             % max_teza, min_zivljenska_doba, max_zivljenska_doba] in vse_pasme:
 			<tr>
-				<td><a href="https://dogtime.com/dog-breeds/{{anglesko_ime}}#/slide/1" style="color:black">{{slovensko_ime}}</a></td>
+				<td><a href="../pasma/{{id_psa}}" style="color:black">{{slovensko_ime}}</a></td>
 				<td>{{primernost_za_stanovanja}}</td>
 			    <td>{{primernost_za_zacetnike}}</td>
 				<td>{{obcutljivost}}</td>

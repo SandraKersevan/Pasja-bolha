@@ -171,7 +171,8 @@ def idealni_psi_get():
     for pes in primerni:
         (id_psa, razlika) = pes
         cur.execute('''SELECT id_pasme, slovensko_ime, slike FROM pasma
-                    WHERE id_pasme={0}'''.format(id_psa))
+                    WHERE id_pasme=%s''', [id_psa])
+        
         id_psa, ime, slika = cur.fetchone()
         psi.append((id_psa, ime, slika))
     return template('idealni_psi',
@@ -186,7 +187,7 @@ def idealni_psi_post():
 
 @route('/vse_pasme/', method='GET')
 def vse_pasme_get():
-    cur.execute('''SELECT slovensko_ime, anglesko_ime, primernost_za_stanovanja, primernost_za_zacetnike,
+    cur.execute('''SELECT id_pasme, slovensko_ime, anglesko_ime, primernost_za_stanovanja, primernost_za_zacetnike,
                      obcutljivost, prenese_samoto, primernost_za_hladno_podnebje,
                      primernost_za_toplo_podnebje, primernost_za_druzine, prijaznost_do_otrok,
                      prijaznost_do_drugih_psov, prijaznost_do_tujcev, izpadanje_dlake, slinjenje,
@@ -207,7 +208,8 @@ def vse_pasme_get(id_psa):
                      nezahtevnost_dlake, splosno_zdravje, potencial_za_debelost, velikost,
                      ucljivost, inteligenca, grizenje, lovski_pes, lajanje, potepanje, potreba_po_gibanju,
                      energicnost, intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza,
-                     max_teza, min_zivljenska_doba, max_zivljenska_doba, slike FROM pasma WHERE id_pasme = {0}'''.format(id_psa))
+                     max_teza, min_zivljenska_doba, max_zivljenska_doba, slike FROM pasma WHERE id_pasme = %s''', [id_psa])
+    
     [pasma] = cur.fetchall()
 
     [slo_ime, ang_ime, stanovanje, zacetnik, obcutljivost, samota, hladno, toplo, druzine, otroci, psi, tujci, izp_dlake, slina,
@@ -217,8 +219,20 @@ def vse_pasme_get(id_psa):
     min_visina, max_visina = int(min_visina), int(max_visina)
     min_teza, max_teza = int(min_teza), int(max_teza)
     min_leta, max_leta = int(min_leta), int(max_leta)
-    druzina = druzina.lower()
-    
+
+    if druzina == "Delovni pes":
+        druzina = "delovnih psov"
+    elif druzina == "Družni pes":
+        druzina = "družnih psov"
+    elif druzina == "Lovski pes":
+        druzina = "lovskih psov"
+    elif druzina == "Mešana pasma":
+        druzina = "mešancev"
+    elif druzina == "Ovčar":
+        druzina = "ovčarjev"
+    elif druzina == "Terier":
+        druzina = "terierjev"
+        
     return template('pasma',
                     slo_ime=slo_ime,
                     ang_ime=ang_ime,
@@ -338,10 +352,10 @@ def registracija_post():
                 cur.execute("SELECT COUNT(*) FROM uporabniki")
                 [[stevilo_uporabnikov]] = cur.fetchall()
                 st_uporabnika = int(stevilo_uporabnikov)+1
-                nov_uporabnik = (st_uporabnika, '{0}'.format(ime), '{0}'.format(priimek),
-                                 '{0}'.format(naslov), '{0}'.format(postna_stevilka),
-                                 '{0}'.format(email), '{0}'.format(telefon), '{0}'.format(uporabnik), '{0}'.format(geslo))
-                cur.execute("INSERT INTO uporabniki VALUES {0}".format(nov_uporabnik))
+
+                cur.execute("INSERT INTO uporabniki VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                            [st_uporabnika, ime, priimek, naslov, postna_stevilka, email, telefon, uporabnik, geslo])
+                
                 response.set_cookie('username', uporabnik, path='/')
                 response.status = 303
                 response.set_header('Location', '/oglasi/starost_oglasa_nar/5/1')
@@ -362,7 +376,7 @@ def oglasi_get(razvrstitev, st_oglasov, stran):
     for row in rows:
         id_oglasa, id_uporabnika, cas_oddaje, id_pasme, skotitev, cena, st_samick, st_samckov = row
         
-        cur.execute("SELECT slovensko_ime, slike FROM pasma WHERE id_pasme={0}".format(id_pasme))
+        cur.execute("SELECT slovensko_ime, slike FROM pasma WHERE id_pasme= %s", [id_pasme])
         pasma, slika = cur.fetchone()
 
         cena_str = ''
@@ -377,7 +391,7 @@ def oglasi_get(razvrstitev, st_oglasov, stran):
         cur.execute('''SELECT regija.regija FROM uporabniki
                     INNER JOIN posta ON uporabniki.posta=posta.postna_st
                     INNER JOIN regija ON posta.regija=regija.id
-                    WHERE uporabniki.id_uporabnika={0}'''.format(id_uporabnika))
+                    WHERE uporabniki.id_uporabnika= %s''', [id_uporabnika])
         [regija] = cur.fetchone()
 
         oglasi.append((cas_oddaje,id_oglasa,slika,pasma,cena,cena_str,regija,st_samick,st_samckov, skotitev))        
@@ -479,7 +493,7 @@ def oglas_get(id_oglasa):
     cur.execute('''SELECT id_uporabnika, cas_oddaje, id_pasme, opis,
                 skotitev, cena, st_samick, st_samckov, rodovnik, veterinarska_oskrba,
                 cepljenje, kastracija_sterilizacija, telefon, email FROM oglas
-                WHERE id_oglasa={0}'''.format(id_oglasa))
+                WHERE id_oglasa= %s''', [id_oglasa])
     [id_uporabnika, cas_oddaje, id_pasme, opis, skotitev, cena, st_samick,
      st_samckov, rodovnik, veterinarska_oskrba, cepljenje, kastracija_sterilizacija,
      telefon, email] = cur.fetchone()
@@ -488,7 +502,7 @@ def oglas_get(id_oglasa):
     skotitev = dan + '.' + mesec + '.' + leto
 
     cur.execute('''SELECT id_pasme, slovensko_ime, anglesko_ime, slike FROM pasma
-                WHERE id_pasme={0}'''.format(id_pasme))
+                WHERE id_pasme= %s''', [id_pasme])
     id_psa, pasma, anglesko_ime, slika = cur.fetchone()
 
     if cena > 0:
@@ -502,12 +516,12 @@ def oglas_get(id_oglasa):
     cur.execute('''SELECT regija.regija_sklanjano FROM uporabniki
                     INNER JOIN posta ON uporabniki.posta=posta.postna_st
                     INNER JOIN regija ON posta.regija=regija.id
-                    WHERE uporabniki.id_uporabnika={0}'''.format(id_uporabnika))
+                    WHERE uporabniki.id_uporabnika= %s''', [id_uporabnika])
     [regija] = cur.fetchone()
 
     #uporabnik
     cur.execute('''SELECT email, stevilka FROM uporabniki
-                WHERE id_uporabnika={0}'''.format(id_uporabnika))
+                WHERE id_uporabnika= %s''', [id_uporabnika])
     email_up, stevilka_up = cur.fetchone()
     if email:
         email = email_up
@@ -538,7 +552,7 @@ def oglas_get(id_oglasa):
     cur.execute('''SELECT uporabniki.uporabnisko_ime, komentar.vsebina,
                 komentar.cas_oddaje FROM komentar INNER JOIN uporabniki
                 ON uporabniki.id_uporabnika=komentar.id_uporabnika
-                WHERE komentar.id_oglasa={0}'''.format(id_oglasa))
+                WHERE komentar.id_oglasa= %s''', [id_oglasa])
     komentarji = cur.fetchall()
     komantarji = komentarji.sort(key=lambda x: x[2])
     popravljeni_komentarji = []
@@ -590,8 +604,9 @@ def oglas_post(id_oglasa):
     [[stevilo_komentarjev]] = cur.fetchall()
     id_komentarja = int(stevilo_komentarjev)+1
 
-    komentar = (id_komentarja, id_uporabnika, id_oglasa, vsebina, cas_oddaje)
-    cur.execute('''INSERT INTO komentar VALUES {0}'''.format(komentar))
+    cur.execute('''INSERT INTO komentar VALUES (%s, %s, %s, %s, %s)''',
+                [id_komentarja, id_uporabnika, id_oglasa, vsebina, cas_oddaje])
+    
     return redirect('/oglas/{0}'.format(id_oglasa))
 
 @route('/ustvari_oglas/', method='GET')
@@ -662,12 +677,10 @@ def ustvari_oglas_post():
 
     cas_oddaje = datetime.now()
 
-    nov_oglas = (id_oglasa, id_uporabnika, '{0}'.format(cas_oddaje), id_pasme, 
-                 '{0}'.format(opis), '{0}'.format(skotitev), '{0}'.format(cena),
-                 '{0}'.format(samicke), '{0}'.format(samcki), '{0}'.format(rodovnik),
-                 '{0}'.format(veterinar), '{0}'.format(cepljenje), '{0}'.format(kastracija),
-                 '{0}'.format(telefon), '{0}'.format(email))
-    cur.execute("INSERT INTO oglas VALUES {0}".format(nov_oglas))
+    cur.execute("INSERT INTO oglas VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                [id_oglasa, id_uporabnika, cas_oddaje, id_pasme, opis, skotitev, cena, samicke,
+                 samcki, rodovnik, veterinar, cepljenje, kastracija, telefon, email])
+
     print("Nov oglas")
     return redirect("/oglasi/starost_oglasa_nar/5/1")
 

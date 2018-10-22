@@ -38,7 +38,7 @@
 			<td height="350" margin-left: 10px>
 				<h4>Splošne informacije</h4>
 				<br>
-				<p>{{slo_ime}} spada v družina {{druzina}}.</p>
+				<p>{{slo_ime}} spada v družino {{druzina}}.</p>
 				<p>{{slo_ime}} zraste od {{min_visina}} do {{max_visina}} cm.</p>
 				<p>{{slo_ime}} tehta od {{min_teza}} do {{max_teza}} kg.</p>
 				<p>{{slo_ime}} živi od {{min_leta}} do {{max_leta}} let.</p>
