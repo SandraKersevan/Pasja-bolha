@@ -193,8 +193,10 @@ def vse_pasme_get():
                      prijaznost_do_drugih_psov, prijaznost_do_tujcev, izpadanje_dlake, slinjenje,
                      nezahtevnost_dlake, splosno_zdravje, potencial_za_debelost, velikost,
                      ucljivost, inteligenca, grizenje, lovski_pes, lajanje, potepanje, potreba_po_gibanju,
-                     energicnost, intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza,
-                     max_teza, min_zivljenska_doba, max_zivljenska_doba FROM pasma''')
+                     energicnost, intenzivnost, igrivost, min_visina, max_visina, min_teza,
+                     max_teza, min_zivljenska_doba, max_zivljenska_doba, druzina.druzina
+                     FROM pasma
+                     INNER JOIN druzina ON druzina.id_druzine = pasma.id_druzine''')
     vse_pasme = cur.fetchall()                    
     return template('vse_pasme',
                     vse_pasme = vse_pasme)
@@ -207,32 +209,16 @@ def vse_pasme_get(id_psa):
                      prijaznost_do_drugih_psov, prijaznost_do_tujcev, izpadanje_dlake, slinjenje,
                      nezahtevnost_dlake, splosno_zdravje, potencial_za_debelost, velikost,
                      ucljivost, inteligenca, grizenje, lovski_pes, lajanje, potepanje, potreba_po_gibanju,
-                     energicnost, intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza,
-                     max_teza, min_zivljenska_doba, max_zivljenska_doba, slike FROM pasma WHERE id_pasme = %s''', [id_psa])
-    
-    [pasma] = cur.fetchall()
+                     energicnost, intenzivnost, igrivost, min_visina, max_visina, min_teza,
+                     max_teza, min_zivljenska_doba, max_zivljenska_doba, druzina.sklanjano, slike
+                     FROM pasma
+                     INNER JOIN druzina ON druzina.id_druzine = pasma.id_druzine
+                     WHERE id_pasme = %s''', [id_psa])
 
     [slo_ime, ang_ime, stanovanje, zacetnik, obcutljivost, samota, hladno, toplo, druzine, otroci, psi, tujci, izp_dlake, slina,
     nez_dlake, zdravje, debelost, velikost, ucljivost, inteligenca, grizenje, lovec, lajanje, potepanje, gibanje, energicnost,
-    intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza, max_teza, min_leta,max_leta,slika] = pasma
-    
-    min_visina, max_visina = int(min_visina), int(max_visina)
-    min_teza, max_teza = int(min_teza), int(max_teza)
-    min_leta, max_leta = int(min_leta), int(max_leta)
-
-    if druzina == "Delovni pes":
-        druzina = "delovnih psov"
-    elif druzina == "Družni pes":
-        druzina = "družnih psov"
-    elif druzina == "Lovski pes":
-        druzina = "lovskih psov"
-    elif druzina == "Mešana pasma":
-        druzina = "mešancev"
-    elif druzina == "Ovčar":
-        druzina = "ovčarjev"
-    elif druzina == "Terier":
-        druzina = "terierjev"
-        
+    intenzivnost, igrivost, min_visina, max_visina, min_teza, max_teza, min_leta,max_leta,druzina,slika] = cur.fetchone()
+          
     return template('pasma',
                     slo_ime=slo_ime,
                     ang_ime=ang_ime,
@@ -282,7 +268,7 @@ def prijava_post():
     username = request.forms.username
     password = request.forms.password
 
-    cur.execute("SELECT uporabnisko_ime, geslo FROM uporabniki WHERE uporabnisko_ime='" + username + "' AND geslo='" + password + "'")
+    cur.execute("SELECT uporabnisko_ime, geslo FROM uporabnik WHERE uporabnisko_ime='" + username + "' AND geslo='" + password + "'")
     if cur.fetchone():
         print("Uspesna prijava")
         response.set_cookie('username', username, path='/')
@@ -334,7 +320,7 @@ def registracija_post():
 
     if uporabnik != None:
         # Ali je email že v bazi?
-        cur.execute("SELECT email FROM uporabniki WHERE email='" + email + "'")
+        cur.execute("SELECT email FROM uporabnik WHERE email='" + email + "'")
         if cur.fetchone():
             # Email že v bazi
             print('Email že uporabljen')
@@ -342,18 +328,18 @@ def registracija_post():
 
         else:
             # Ali uporabnik že obstaja?
-            cur.execute("SELECT uporabnisko_ime FROM uporabniki WHERE uporabnisko_ime='" + uporabnik + "'")
+            cur.execute("SELECT uporabnisko_ime FROM uporabnik WHERE uporabnisko_ime='" + uporabnik + "'")
             if cur.fetchone():
                 # Uporabnik že obstaja
                 print('Uporabnik že obstaja')
                 return redirect("/napaka_ime/")
             else:
                 # Vse je v redu, vstavi novega uporabnika v bazo
-                cur.execute("SELECT COUNT(*) FROM uporabniki")
+                cur.execute("SELECT COUNT(*) FROM uporabnik")
                 [[stevilo_uporabnikov]] = cur.fetchall()
                 st_uporabnika = int(stevilo_uporabnikov)+1
 
-                cur.execute("INSERT INTO uporabniki VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                cur.execute("INSERT INTO uporabnik VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
                             [st_uporabnika, ime, priimek, naslov, postna_stevilka, email, telefon, uporabnik, geslo])
                 
                 response.set_cookie('username', uporabnik, path='/')
@@ -388,10 +374,10 @@ def oglasi_get(razvrstitev, st_oglasov, stran):
             cena_str = 'Podarim'
 
         #regija
-        cur.execute('''SELECT regija.regija FROM uporabniki
-                    INNER JOIN posta ON uporabniki.posta=posta.postna_st
+        cur.execute('''SELECT regija.regija FROM uporabnik
+                    INNER JOIN posta ON uporabnik.posta=posta.postna_st
                     INNER JOIN regija ON posta.regija=regija.id
-                    WHERE uporabniki.id_uporabnika= %s''', [id_uporabnika])
+                    WHERE uporabnik.id_uporabnika= %s''', [id_uporabnika])
         [regija] = cur.fetchone()
 
         oglasi.append((cas_oddaje,id_oglasa,slika,pasma,cena,cena_str,regija,st_samick,st_samckov, skotitev))        
@@ -513,14 +499,14 @@ def oglas_get(id_oglasa):
         cena = 'Po dogovoru'
 
     #regija
-    cur.execute('''SELECT regija.regija_sklanjano FROM uporabniki
-                    INNER JOIN posta ON uporabniki.posta=posta.postna_st
+    cur.execute('''SELECT regija.regija_sklanjano FROM uporabnik
+                    INNER JOIN posta ON uporabnik.posta=posta.postna_st
                     INNER JOIN regija ON posta.regija=regija.id
-                    WHERE uporabniki.id_uporabnika= %s''', [id_uporabnika])
+                    WHERE uporabnik.id_uporabnika= %s''', [id_uporabnika])
     [regija] = cur.fetchone()
 
     #uporabnik
-    cur.execute('''SELECT email, stevilka FROM uporabniki
+    cur.execute('''SELECT email, stevilka FROM uporabnik
                 WHERE id_uporabnika= %s''', [id_uporabnika])
     email_up, stevilka_up = cur.fetchone()
     if email:
@@ -549,9 +535,9 @@ def oglas_get(id_oglasa):
         kastracija_sterilizacija = 'ni'
 
     # komentariji
-    cur.execute('''SELECT uporabniki.uporabnisko_ime, komentar.vsebina,
-                komentar.cas_oddaje FROM komentar INNER JOIN uporabniki
-                ON uporabniki.id_uporabnika=komentar.id_uporabnika
+    cur.execute('''SELECT uporabnik.uporabnisko_ime, komentar.vsebina,
+                komentar.cas_oddaje FROM komentar INNER JOIN uporabnik
+                ON uporabnik.id_uporabnika=komentar.id_uporabnika
                 WHERE komentar.id_oglasa= %s''', [id_oglasa])
     komentarji = cur.fetchall()
     komantarji = komentarji.sort(key=lambda x: x[2])
@@ -593,7 +579,7 @@ def oglas_post(id_oglasa):
 
     # Iz baze preberemo id_uporabnika
     uporabnik = request.get_cookie('username')
-    cur.execute("SELECT id_uporabnika FROM uporabniki WHERE uporabnisko_ime='" + uporabnik + "'")
+    cur.execute("SELECT id_uporabnika FROM uporabnik WHERE uporabnisko_ime='" + uporabnik + "'")
     [[id_uporabnika]] = cur.fetchall()
     id_uporabnika = int(id_uporabnika)
  
@@ -666,7 +652,7 @@ def ustvari_oglas_post():
         cena = 0
     
     # Iz baze preberemo id_uporabnika
-    cur.execute("SELECT id_uporabnika FROM uporabniki WHERE uporabnisko_ime='" + uporabnik + "'")
+    cur.execute("SELECT id_uporabnika FROM uporabnik WHERE uporabnisko_ime='" + uporabnik + "'")
     [[id_uporabnika]] = cur.fetchall()
     id_uporabnika = int(id_uporabnika)
 
