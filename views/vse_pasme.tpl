@@ -25,40 +25,42 @@
 		<center>
 		<table border="1" id="myTable">
 			<tr>
-				<th onclick="sortTable(0)">Ime pasme</th>
-				<th onclick="sortTable(1)">Primeren za stanovanja</th>
-				<th onclick="sortTable(2)">Primeren za začetnike</th>
-				<th  onclick="sortTable(3)">Občutljivost pasme</th>
-				<th  onclick="sortTable(4)">Prenese samoto</th>
-				<th  onclick="sortTable(5)">Primeren za hladno podnebje</th>
-				<th  onclick="sortTable(6)">Primeren za toplo podnebje</th>
-				<th  onclick="sortTable(7)">Primeren za družine</th>
-				<th  onclick="sortTable(8)">Prijazen do otrok</th>
-				<th  onclick="sortTable(9)">Prijazen do drugih psov</th>
-				<th  onclick="sortTable(10)">Prijazen do tujcev</th>
-				<th  onclick="sortTable(11)">Izpadanje dlake</th>
-				<th  onclick="sortTable(12)">Slinjenje</th>
-				<th  onclick="sortTable(13)">Nezahtevnost dlake</th>
-				<th  onclick="sortTable(14)">Splošno zdravje</th>
-				<th  onclick="sortTable(15)">Nagnjenost k debelosti</th>
-				<th  onclick="sortTable(16)">Velikost pasme</th>
-				<th  onclick="sortTable(17)">Učljivost pasme</th>
-				<th  onclick="sortTable(18)">Inteligenca pasme</th>
-				<th  onclick="sortTable(19)">Nagnjenost k grizenju</th>
-				<th  onclick="sortTable(20)">Lovski nagon pasme</th>
-				<th  onclick="sortTable(21)">Nagnjenost k lajanju</th>
-				<th  onclick="sortTable(22)">Nagnjenost k potepanju</th>
-				<th  onclick="sortTable(23)">Potreba po gibanju</th>
-				<th  onclick="sortTable(24)">Energičnost pasme</th>
-				<th  onclick="sortTable(25)">Inteziteta pasme</th>
-				<th  onclick="sortTable(26)">Igrivost pasme</th>
-				<th  onclick="sortTable(27)">Minimalna višina (v cm)</th>
-				<th  onclick="sortTable(28)">Maksimalna višina (v cm)</th>
-				<th  onclick="sortTable(29)">Minimalna teža (v kg)</th>
-				<th  onclick="sortTable(30)">Maksimalna teža (v kg)</th>
-				<th  onclick="sortTable(31)">Minimalna življenska doba</th>
-				<th  onclick="sortTable(32)">Maksimalna življenska doba</th>
-				<th  onclick="sortTable(33)">Družina</th>
+			<center>
+				<th valign="center" onclick="sortTable(0)"><center>Ime pasme</center></th>
+				<th style="padding: 8px;" onclick="sortTable(1)" style="padding: 50px;"><center>Primeren <br />za stanovanja</center></th>
+				<th style="padding: 8px;" onclick="sortTable(2)"><center>Primeren <br />za začetnike</center></th>
+				<th style="padding: 8px;" onclick="sortTable(3)"><center>Občutljivost <br />pasme</center></th>
+				<th style="padding: 8px;" onclick="sortTable(4)"><center>Prenese <br />samoto</center></th>
+				<th style="padding: 8px;" onclick="sortTable(5)"><center>Primeren <br />za hladno podnebje</center></center></th>
+				<th style="padding: 8px;" onclick="sortTable(6)"><center>Primeren <br />za toplo podnebje</center></th>
+				<th style="padding: 8px;" onclick="sortTable(7)"><center>Primeren <br />za družine</center></th>
+				<th style="padding: 8px;" onclick="sortTable(8)"><center>Prijazen <br />do otrok</center></th>
+				<th style="padding: 8px;" onclick="sortTable(9)"><center>Prijazen <br />do drugih psov</center></th>
+				<th style="padding: 8px;" onclick="sortTable(10)"><center>Prijazen <br />do tujcev</center></th>
+				<th style="padding: 8px;" onclick="sortTable(11)"><center>Izpadanje <br />dlake</center></th>
+				<th style="padding: 8px;" onclick="sortTable(12)"><center>Slinjenje</center></th>
+				<th style="padding: 8px;" onclick="sortTable(13)"><center>Nezahtevnost <br />dlake</center></th>
+				<th style="padding: 8px;" onclick="sortTable(14)"><center>Splošno <br />zdravje</center></th>
+				<th style="padding: 8px;" onclick="sortTable(15)"><center>Nagnjenost <br />k debelosti</center></th>
+				<th style="padding: 8px;" onclick="sortTable(16)"><center>Velikost <br />pasme</center></th>
+				<th style="padding: 8px;" onclick="sortTable(17)"><center>Učljivost <br />pasme</center></th>
+				<th style="padding: 8px;" onclick="sortTable(18)"><center>Inteligenca <br />pasme</center></th>
+				<th style="padding: 8px;" onclick="sortTable(19)"><center>Nagnjenost <br />k grizenju</center></th>
+				<th style="padding: 8px;" onclick="sortTable(20)"><center>Lovski nagon <br />pasme</center></th>
+				<th style="padding: 8px;" onclick="sortTable(21)"><center>Nagnjenost <br />k lajanju</center></th>
+				<th style="padding: 8px;" onclick="sortTable(22)"><center>Nagnjenost <br />k potepanju</center></th>
+				<th style="padding: 8px;" onclick="sortTable(23)"><center>Potreba <br />po gibanju</center></th>
+				<th style="padding: 8px;" onclick="sortTable(24)"><center>Energičnost <br />pasme</center></th>
+				<th style="padding: 8px;" onclick="sortTable(25)"><center>Inteziteta <br />pasme</center></th>
+				<th style="padding: 8px;" onclick="sortTable(26)"><center>Igrivost <br />pasme</center></th>
+				<th style="padding: 8px;" onclick="sortTable(27)"><center>Minimalna višina <br /> (v cm)</center></th>
+				<th style="padding: 8px;" onclick="sortTable(28)"><center>Maksimalna višina <br />(v cm)</center></th>
+				<th style="padding: 8px;" onclick="sortTable(29)"><center>Minimalna teža <br />(v kg)</center></th>
+				<th style="padding: 8px;" onclick="sortTable(30)"><center>Maksimalna teža <br />(v kg)</center></th>
+				<th style="padding: 8px;" onclick="sortTable(31)"><center>Minimalna <br />življenska doba</center></th>
+				<th style="padding: 8px;" onclick="sortTable(32)"><center>Maksimalna <br />življenska doba</center></th>
+				<th valign="center" onclick="sortTable(33)"><center>Družina</center></th>
+			</center>
 			</tr>
 			%for [id_psa, slovensko_ime, anglesko_ime, primernost_za_stanovanja, primernost_za_zacetnike,
             % obcutljivost, prenese_samoto, primernost_za_hladno_podnebje,
@@ -66,8 +68,8 @@
             % prijaznost_do_drugih_psov, prijaznost_do_tujcev, izpadanje_dlake, slinjenje,
             % nezahtevnost_dlake, splosno_zdravje, potencial_za_debelost, velikost,
             % ucljivost, inteligenca, grizenje, lovski_pes, lajanje, potepanje, potreba_po_gibanju,
-            % energicnost, intenzivnost, igrivost, druzina, min_visina, max_visina, min_teza,
-            % max_teza, min_zivljenska_doba, max_zivljenska_doba] in vse_pasme:
+            % energicnost, intenzivnost, igrivost, min_visina, max_visina, min_teza,
+            % max_teza, min_zivljenska_doba, max_zivljenska_doba, druzina] in vse_pasme:
 			<tr>
 				<td><a href="../pasma/{{id_psa}}" style="color:black">{{slovensko_ime}}</a></td>
 				<td>{{primernost_za_stanovanja}}</td>
@@ -96,13 +98,13 @@
 				<td>{{energicnost}}</td>
 				<td>{{intenzivnost}}</td>
 			    <td>{{igrivost}}</td>
-				<td>{{druzina}}</td>
 				<td>{{min_visina}}</td>
 			    <td>{{max_visina}}</td>
 				<td>{{min_teza}}</td>
 				<td>{{max_teza}}</td>
 			    <td>{{min_zivljenska_doba}}</td>
 				<td>{{max_zivljenska_doba}}</td>
+				<td>{{druzina}}</td>			
 			</tr>
 		% end
 		</table>

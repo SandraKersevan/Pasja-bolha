@@ -40,28 +40,7 @@ div#sporocilo {
     padding: 5px;
 }
 
-.verticalTableHeader {
-    text-align:initial;
-    transform-origin:50% 50%;
-    transform: rotate(-90deg);
-	padding-left: 0px;
-	margin-left: 0px;
-	max-width: 13px;
-}
-.verticalTableHeader:before {
-    content:'';
-    padding-top:110%;/* takes width as reference, + 10% for faking some extra padding */
-    display:inline-flex;
-    vertical-align:middle;
-}
-
-th {
-   text-align: left;
-   white-space:nowrap;
-}
-
 td {
-   width: 3%;
    text-align: center;
    white-space:nowrap;
 }
