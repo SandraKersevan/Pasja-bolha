@@ -268,7 +268,8 @@ def prijava_post():
     username = request.forms.username
     password = request.forms.password
 
-    cur.execute("SELECT uporabnisko_ime, geslo FROM uporabnik WHERE uporabnisko_ime='" + username + "' AND geslo='" + password + "'")
+    cur.execute("SELECT uporabnisko_ime, geslo FROM uporabnik WHERE uporabnisko_ime=%s AND geslo=%s", [username, password])
+    
     if cur.fetchone():
         print("Uspesna prijava")
         response.set_cookie('username', username, path='/')
@@ -320,7 +321,7 @@ def registracija_post():
 
     if uporabnik != None:
         # Ali je email že v bazi?
-        cur.execute("SELECT email FROM uporabnik WHERE email='" + email + "'")
+        cur.execute("SELECT email FROM uporabnik WHERE email=%s", [email])
         if cur.fetchone():
             # Email že v bazi
             print('Email že uporabljen')
@@ -328,7 +329,7 @@ def registracija_post():
 
         else:
             # Ali uporabnik že obstaja?
-            cur.execute("SELECT uporabnisko_ime FROM uporabnik WHERE uporabnisko_ime='" + uporabnik + "'")
+            cur.execute("SELECT uporabnisko_ime FROM uporabnik WHERE uporabnisko_ime=%s", [uporabnik])
             if cur.fetchone():
                 # Uporabnik že obstaja
                 print('Uporabnik že obstaja')
@@ -579,7 +580,7 @@ def oglas_post(id_oglasa):
 
     # Iz baze preberemo id_uporabnika
     uporabnik = request.get_cookie('username')
-    cur.execute("SELECT id_uporabnika FROM uporabnik WHERE uporabnisko_ime='" + uporabnik + "'")
+    cur.execute("SELECT id_uporabnika FROM uporabnik WHERE uporabnisko_ime=%s", [uporabnik])
     [[id_uporabnika]] = cur.fetchall()
     id_uporabnika = int(id_uporabnika)
  
@@ -652,7 +653,7 @@ def ustvari_oglas_post():
         cena = 0
     
     # Iz baze preberemo id_uporabnika
-    cur.execute("SELECT id_uporabnika FROM uporabnik WHERE uporabnisko_ime='" + uporabnik + "'")
+    cur.execute("SELECT id_uporabnika FROM uporabnik WHERE uporabnisko_ime=%s", [uporabnik])
     [[id_uporabnika]] = cur.fetchall()
     id_uporabnika = int(id_uporabnika)
 
