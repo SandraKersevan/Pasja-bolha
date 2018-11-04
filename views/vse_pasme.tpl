@@ -52,13 +52,13 @@
 				<th  onclick="sortTable(24)">Energičnost pasme</th>
 				<th  onclick="sortTable(25)">Inteziteta pasme</th>
 				<th  onclick="sortTable(26)">Igrivost pasme</th>
-				<th  onclick="sortTable(27)">Družina</th>
-				<th  onclick="sortTable(28)">Minimalna višina (v cm)</th>
-				<th  onclick="sortTable(29)">Maksimalna višina (v cm)</th>
-				<th  onclick="sortTable(30)">Minimalna teža (v kg)</th>
-				<th  onclick="sortTable(31)">Maksimalna teža (v kg)</th>
-				<th  onclick="sortTable(32)">Minimalna življenska doba</th>
-				<th onclick="sortTable(33)">Maksimalna življenska doba</th>
+				<th  onclick="sortTable(27)">Minimalna višina (v cm)</th>
+				<th  onclick="sortTable(28)">Maksimalna višina (v cm)</th>
+				<th  onclick="sortTable(29)">Minimalna teža (v kg)</th>
+				<th  onclick="sortTable(30)">Maksimalna teža (v kg)</th>
+				<th  onclick="sortTable(31)">Minimalna življenska doba</th>
+				<th  onclick="sortTable(32)">Maksimalna življenska doba</th>
+				<th  onclick="sortTable(33)">Družina</th>
 			</tr>
 			%for [id_psa, slovensko_ime, anglesko_ime, primernost_za_stanovanja, primernost_za_zacetnike,
             % obcutljivost, prenese_samoto, primernost_za_hladno_podnebje,
